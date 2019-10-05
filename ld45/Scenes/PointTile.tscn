@@ -16,7 +16,22 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="move_point_lbl" type="Label" parent="."]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1.04626, 1.13086 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "1"
+align = 1
+valign = 1
+
 [node name="move_timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="point_timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
@@ -24,4 +39,5 @@ autostart = true
 scale = Vector2( 1.56, 1.6 )
 
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="point_timer" to="." method="_on_point_timer_timeout"]
 [connection signal="screen_exited" from="visibility" to="." method="_on_visibility_screen_exited"]

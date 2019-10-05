@@ -1,5 +1,7 @@
 extends "res://Scripts/Tile.gd"
 
+onready var move_timer = $move_timer
+
 func _on_move_timer_timeout():
 	move()
 

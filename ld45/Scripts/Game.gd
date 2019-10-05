@@ -1,8 +1,5 @@
 extends Node2D
 
-# Actual level tiles
-var level_grid
-
 # Customizable level data
 export (int) var grid_width = 8
 export (int) var grid_height = 10
@@ -11,50 +8,43 @@ export (int) var y_start = 15
 export (int) var x_off = 32
 export (int) var y_off = 32
 
-# Keep up with the player tile
+# Actual level tiles
+var level_grid
+
+# Keep up with the object tiles
 var player
+var bomb
 
 # Loading the tiles that will be used
 var tiles = [
 	preload("res://Scenes/DefaultTile.tscn"),
-	preload("res://Scenes/Player.tscn")
+	preload("res://Scenes/Player.tscn"),
+	preload("res://Scenes/Bomb.tscn")
 ]
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	initGrid()
+
+	# This function will do more when there are more tile types
+	draw_level()
 	
+	initObject(player, 1, 4, grid_height - 1)
+	initObject(bomb, 2, 4, 1)
+
+func initGrid():
 	# Initialize the grid to all default tiles
 	level_grid = []
 	for i in range(grid_width):
 		level_grid.append([])
 		for j in range(grid_height):
 			level_grid[i].append(0)
-			
-	# This function will do more when there are more tile types
-	draw_level()
-	
-	# Initialize the player object
-	player = tiles[1].instance()
-	
-	# Add the player to the game
-	add_child(player)
-	
-	# Set position and player variables
-	var player_position = grid_to_pixel(4, grid_height - 1)
-	player.position = Vector2(player_position[0], player_position[1])
-	player.grid_x = 4
-	player.grid_y =  grid_height - 1
 
-# Check for input every frame
-func _process(delta):
-	check_input()
-		
-# Convert grid coordinates to pixel values
 func grid_to_pixel(x, y):
+	# Convert grid coordinates to pixel values
 	return Vector2(x * x_off + x_start, y * y_off + y_start)
-		
-# Draw each tile in the level grid
+
 func draw_level():
+	# Draw each tile in the level grid
 	for i in range(grid_width):
 		for j in range(grid_height):
 			if (level_grid[i][j] == 0):
@@ -62,26 +52,16 @@ func draw_level():
 				add_child(tile)
 				var pos = grid_to_pixel(i, j)
 				tile.position = Vector2(pos[0], pos[1])
-				
-func check_input():
-	# Calculate the direction the player is trying to go
-	var dir = Vector2(0, 0)
+
+func initObject(whichTile, tileNo, tilePosX, tilePosY):
+	# Initialize the tile object
+	whichTile = tiles[tileNo].instance()
 	
-	if (Input.is_action_just_pressed("ui_right") && player.grid_x < grid_width - 1):
-		dir = Vector2(1, 0)
-	if (Input.is_action_just_pressed("ui_left") && player.grid_x > 0):
-		dir = Vector2(-1, 0)
-#	elif (Input.is_action_just_pressed("ui_up")):
-#		dir = Vector2(0, -1)
-#	elif (Input.is_action_just_pressed("ui_down")):
-#		dir = Vector2(0, 1)
+	# Add the tile object to the game
+	add_child(whichTile)
 	
-	# Move the player to the new position
-	if (dir != Vector2(0, 0)):
-		var target = Vector2(player.grid_x + dir[0], player.grid_y + dir[1])
-		player.position = grid_to_pixel(target[0], target[1])
-		player.grid_x = target[0]
-		player.grid_y = target[1]
-	
-	# Set direction back to nothing
-	dir = Vector2(0, 0)
+	# Set position and tile object variables
+	var tile_position = grid_to_pixel(tilePosX, tilePosY)
+	whichTile.position = Vector2(tile_position[0], tile_position[1])
+	whichTile.grid_x = tilePosX
+	whichTile.grid_y =  tilePosY

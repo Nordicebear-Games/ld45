@@ -1,6 +1,6 @@
 extends Node2D
 
-export (Array, PackedScene) var objects
+export (Array, PackedScene) var spawned_tiles
 
 #Customizable level data
 export (int) var grid_width = 8
@@ -10,8 +10,8 @@ export (int) var y_start = 15
 export (int) var x_off = 32
 export (int) var y_off = 32
 
+onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
-onready var obj_con = $ObjectContainer
 
 # Actual level tiles
 var level_grid
@@ -21,8 +21,7 @@ var bomb
 #Loading the tiles that will be used
 var tiles = [
 	preload("res://Scenes/DefaultTile.tscn"),
-	preload("res://Scenes/Player.tscn"),
-	preload("res://Scenes/Bomb.tscn")
+	preload("res://Scenes/PlayerTile.tscn")
 ]
 
 func _ready():
@@ -32,7 +31,8 @@ func _ready():
 	draw_level()
 	
 	#initialize player
-	initPlayer(4, grid_height - 1)
+	randomize()
+	initPlayer(randi()%8, grid_height - 1)
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -52,7 +52,7 @@ func draw_level():
 		for j in range(grid_height):
 			if (level_grid[i][j] == 0):
 				var tile = tiles[0].instance()
-				tile_con.add_child(tile)
+				def_tile_con.add_child(tile)
 				var pos = grid_to_pixel(i, j)
 				tile.position = Vector2(pos[0], pos[1])
 
@@ -70,17 +70,18 @@ func initPlayer(posX, posY):
 	player.grid_y =  posY
 
 func _on_SpawnObjectTimer_timeout():
-	chooseObjectAndInit()
+	chooseTileAndInit()
 
-func chooseObjectAndInit():
-		var ins_object = objects[randi() % objects.size()].instance() #choose a object and instance it
-		obj_con.add_child(ins_object)
+func chooseTileAndInit():
+		var ins_tile = spawned_tiles[randi() % spawned_tiles.size()].instance() #choose a object and instance it
+		tile_con.add_child(ins_tile)
 		#initialize the choosen object
-		initObject(ins_object, randi()%8, 0)
+		randomize()
+		initTile(ins_tile, randi()%8, 0)
 
-func initObject(whichObj, objPosX, objPosY):
+func initTile(whichTile, tilePosX, tilePosY):
 	# Set position and tile object variables
-	var obj_position = grid_to_pixel(objPosX, objPosY)
-	whichObj.position = Vector2(obj_position[0], obj_position[1])
-	whichObj.grid_x = objPosX
-	whichObj.grid_y =  objPosY
+	var tile_position = grid_to_pixel(tilePosX, tilePosY)
+	whichTile.position = Vector2(tile_position[0], tile_position[1])
+	whichTile.grid_x = tilePosX
+	whichTile.grid_y =  tilePosY

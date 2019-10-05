@@ -98,7 +98,7 @@ func pick_rand_number():
 	randomize()
 	return randi()%100 + 1
 
-func from_point_to_bomb(old_tile, posX, posY):
+func from_point_to_bomb(old_tile, posX, posY): #change point tile as bomb tile when move point is 0
 	#instance bomb tile
 	var ins_bomb_tile = bomb_tile.instance()
 	tile_con.add_child(ins_bomb_tile)

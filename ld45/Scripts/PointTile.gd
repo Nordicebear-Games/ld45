@@ -2,14 +2,15 @@ extends "res://Scripts/SpawnedTile.gd"
 
 signal make_it_bomb_tile(old_tile, posX, posY)
 
-export var max_point = 10
+export var max_point = 25
 export (Array, Color) var colors
 
 onready var sprite = $Sprite
 onready var move_point_lbl = $move_point_lbl
 onready var point_timer = $point_timer
 
-var rand_move_point
+var move_point_value
+var choosen_color
 
 func _ready():
 	choose_color()
@@ -17,19 +18,19 @@ func _ready():
 	point_timer.wait_time = move_timer.wait_time
 
 func choose_color():
-	var choosen_color = colors[randi() % colors.size()]
+	choosen_color = colors[randi() % colors.size()]
 	sprite.modulate = choosen_color
 
 func move_point(con):
 	if con == "pick":
 		randomize()
-		rand_move_point = randi()%max_point + 1
-		move_point_lbl.text = str(rand_move_point)
+		move_point_value = randi()%max_point + 1
+		move_point_lbl.text = str(move_point_value)
 	if con == "reduce":
-		if rand_move_point > 0:
-			rand_move_point -= 1
-			move_point_lbl.text = str(rand_move_point)
-			if rand_move_point == 0:
+		if move_point_value > 0:
+			move_point_value -= 1
+			move_point_lbl.text = str(move_point_value)
+			if move_point_value == 0:
 				emit_signal("make_it_bomb_tile", self, self.grid_x, self.grid_y)
 
 func _on_point_timer_timeout():

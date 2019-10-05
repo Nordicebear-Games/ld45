@@ -75,7 +75,7 @@ func _on_SpawnObjectTimer_timeout():
 
 func chooseTileAndInit():
 	var rand_number = pick_rand_number()
-	print(rand_number)
+#	print(rand_number)
 	if rand_number < 10:
 		ins_tile = bomb_tile.instance()
 	else:

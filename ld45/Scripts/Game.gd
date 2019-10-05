@@ -4,6 +4,7 @@ export (PackedScene) var default_tile
 export (PackedScene) var player_tile
 export (PackedScene) var point_tile
 export (PackedScene) var bomb_tile
+export (Array, PackedScene) var special_tiles
 
 #Customizable level data
 export (int) var grid_width = 8
@@ -75,9 +76,8 @@ func _on_SpawnObjectTimer_timeout():
 
 func chooseTileAndInit():
 	var rand_number = pick_rand_number()
-#	print(rand_number)
-	if rand_number < 10:
-		ins_tile = bomb_tile.instance()
+	if rand_number < 10: #instance life or bomb tile
+		ins_tile = special_tiles[randi() % special_tiles.size()].instance()
 	else:
 		ins_tile = point_tile.instance()
 		_signal_connect("point_tile")

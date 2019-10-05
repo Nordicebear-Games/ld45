@@ -15,3 +15,6 @@ var grid_y
 func grid_to_pixel(x, y):
 	# Convert grid coordinates to pixel values
 	return Vector2(x * x_off + x_start, y * y_off + y_start)
+
+func destroy():
+	call_deferred("free")

@@ -1,5 +1,7 @@
 extends "res://Scripts/SpawnedTile.gd"
 
+signal make_it_bomb_tile(old_tile, posX, posY)
+
 export var max_point = 10
 export (Array, Color) var colors
 
@@ -27,6 +29,8 @@ func move_point(con):
 		if rand_move_point > 0:
 			rand_move_point -= 1
 			move_point_lbl.text = str(rand_move_point)
+			if rand_move_point == 0:
+				emit_signal("make_it_bomb_tile", self, self.grid_x, self.grid_y)
 
 func _on_point_timer_timeout():
 	move_point("reduce")

@@ -1,7 +1,7 @@
 extends Node2D
 
-#export (Array, PackedScene) var spawned_tiles
-
+export (PackedScene) var default_tile
+export (PackedScene) var player_tile
 export (PackedScene) var point_tile
 export (PackedScene) var bomb_tile
 
@@ -16,16 +16,10 @@ export (int) var y_off = 32
 onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
 
-# Actual level tiles
 var level_grid
-#Keep up with the object tiles
 var player
 var bomb
-#Loading the tiles that will be used
-var tiles = [
-	preload("res://Scenes/DefaultTile.tscn"),
-	preload("res://Scenes/PlayerTile.tscn")
-]
+var ins_tile
 
 func _ready():
 	initGrid()
@@ -35,7 +29,7 @@ func _ready():
 	
 	#initialize player
 	randomize()
-	initPlayer(randi()%8, grid_height - 1)
+	initPlayer(randi()%8, grid_height / 2)
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -54,14 +48,18 @@ func draw_level():
 	for i in range(grid_width):
 		for j in range(grid_height):
 			if (level_grid[i][j] == 0):
-				var tile = tiles[0].instance()
+				var tile = default_tile.instance()
 				def_tile_con.add_child(tile)
 				var pos = grid_to_pixel(i, j)
 				tile.position = Vector2(pos[0], pos[1])
 
+func _signal_connect(which_tile):
+	if which_tile == "point_tile":
+		ins_tile.connect("make_it_bomb_tile", self, "from_point_to_bomb")
+
 func initPlayer(posX, posY):
 	# Initialize the player
-	player = tiles[1].instance()
+	player = player_tile.instance()
 	
 	# Add the tile object to the game
 	add_child(player)
@@ -76,13 +74,13 @@ func _on_SpawnObjectTimer_timeout():
 	chooseTileAndInit()
 
 func chooseTileAndInit():
-	var ins_tile
 	var rand_number = pick_rand_number()
 	print(rand_number)
 	if rand_number < 10:
 		ins_tile = bomb_tile.instance()
 	else:
 		ins_tile = point_tile.instance()
+		_signal_connect("point_tile")
 
 	tile_con.add_child(ins_tile)
 	#initialize the choosen object
@@ -99,3 +97,11 @@ func initTile(whichTile, tilePosX, tilePosY):
 func pick_rand_number():
 	randomize()
 	return randi()%100 + 1
+
+func from_point_to_bomb(old_tile, posX, posY):
+	#instance bomb tile
+	var ins_bomb_tile = bomb_tile.instance()
+	tile_con.add_child(ins_bomb_tile)
+	initTile(ins_bomb_tile, posX, posY)
+	#destroy old tile
+	old_tile.destroy()

@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/SpawnedTile.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/PointTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/point_tile.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.762, 13.5595 )
 
-[node name="Point" type="Area2D"]
+[node name="PointTile" type="Area2D"]
 script = ExtResource( 1 )
+colors = [ Color( 0.776471, 0.25098, 0.25098, 1 ), Color( 0.133333, 0.658824, 0.843137, 1 ), Color( 0.223529, 0.839216, 0.290196, 1 ), Color( 0.815686, 0.839216, 0.188235, 1 ), Color( 0.639216, 0.192157, 0.776471, 1 ), Color( 0.901961, 0.545098, 0.105882, 1 ), Color( 0.843137, 0.196078, 0.611765, 1 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/PlayerTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/player_tile.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.0693, 14.2292 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_size = 1
+outline_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+font_data = ExtResource( 3 )
 
 [node name="PlayerTile" type="Area2D" groups=[
 "player_tile",
@@ -15,7 +22,6 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="move_point_lbl" type="Label" parent="."]
@@ -23,6 +29,7 @@ margin_left = -16.0
 margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
 align = 1

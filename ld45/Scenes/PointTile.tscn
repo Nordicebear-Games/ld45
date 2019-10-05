@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/PointTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/point_tile.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.7236, 13.7625 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_size = 1
+outline_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+font_data = ExtResource( 3 )
 
 [node name="PointTile" type="Area2D" groups=[
 "point_tile",
@@ -21,9 +28,9 @@ shape = SubResource( 1 )
 [node name="move_point_lbl" type="Label" parent="."]
 margin_left = -16.0
 margin_top = -16.0
-margin_right = 14.0
-margin_bottom = 14.0
-rect_scale = Vector2( 1.04626, 1.13086 )
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "1"
 align = 1

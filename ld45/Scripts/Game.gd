@@ -1,6 +1,9 @@
 extends Node2D
 
-export (Array, PackedScene) var spawned_tiles
+#export (Array, PackedScene) var spawned_tiles
+
+export (PackedScene) var point_tile
+export (PackedScene) var bomb_tile
 
 #Customizable level data
 export (int) var grid_width = 8
@@ -73,11 +76,18 @@ func _on_SpawnObjectTimer_timeout():
 	chooseTileAndInit()
 
 func chooseTileAndInit():
-		var ins_tile = spawned_tiles[randi() % spawned_tiles.size()].instance() #choose a object and instance it
-		tile_con.add_child(ins_tile)
-		#initialize the choosen object
-		randomize()
-		initTile(ins_tile, randi()%8, 0)
+	var ins_tile
+	var rand_number = pick_rand_number()
+	print(rand_number)
+	if rand_number < 10:
+		ins_tile = bomb_tile.instance()
+	else:
+		ins_tile = point_tile.instance()
+
+	tile_con.add_child(ins_tile)
+	#initialize the choosen object
+	randomize()
+	initTile(ins_tile, randi()%8, 0)
 
 func initTile(whichTile, tilePosX, tilePosY):
 	# Set position and tile object variables
@@ -85,3 +95,7 @@ func initTile(whichTile, tilePosX, tilePosY):
 	whichTile.position = Vector2(tile_position[0], tile_position[1])
 	whichTile.grid_x = tilePosX
 	whichTile.grid_y =  tilePosY
+
+func pick_rand_number():
+	randomize()
+	return randi()%100 + 1

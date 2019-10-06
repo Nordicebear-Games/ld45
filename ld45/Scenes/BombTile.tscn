@@ -8,6 +8,7 @@ extents = Vector2( 13.9582, 14.1876 )
 
 [node name="BombTile" type="Area2D" groups=[
 "bomb_tile",
+"special_tile",
 ]]
 script = ExtResource( 1 )
 

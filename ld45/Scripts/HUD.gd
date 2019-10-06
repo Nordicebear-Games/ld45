@@ -17,3 +17,7 @@ func assing_highscore(value):
 func game_over():
 	gameover_hud.visible = true
 	assing_highscore(Global.score)
+
+func _on_restart_btn_pressed():
+	gameover_hud.visible = false
+	Global.change_scene("Game")

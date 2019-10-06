@@ -85,3 +85,4 @@ margin_right = 192.0
 margin_bottom = 256.0
 text = "Restart Game"
 
+[connection signal="pressed" from="GameOver_HUD/restart_btn" to="." method="_on_restart_btn_pressed"]

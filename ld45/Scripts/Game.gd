@@ -38,6 +38,9 @@ func _ready():
 	#initialize aim
 	randomize()
 	init_aim_tile(randi()%grid_width, grid_height / 2)
+	
+	#reset score after every new start
+	Global.score = 0
 
 func initGrid():
 	# Initialize the grid to all default tiles

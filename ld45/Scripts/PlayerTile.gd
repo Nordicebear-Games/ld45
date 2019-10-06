@@ -45,7 +45,6 @@ func move():
 	dir = Vector2(0, 0)
 
 func _on_PlayerTile_area_entered(area):
-#	print("player tile area")
 	if area.is_in_group("point_tile"):
 		#color control
 		if sprite.modulate == area.choosen_color:
@@ -60,9 +59,19 @@ func _on_PlayerTile_area_entered(area):
 		sprite.modulate = area.choosen_color
 		# assign move point value
 		move_point_lbl.text = str(move_point_value)
+	
+	if area.is_in_group("life_tile"):
+		Global.life += 1
+		area.destroy()
+	
 	if area.is_in_group("bomb_tile"):
-		self.destroy()
-		emit_signal("game_over")
+		if Global.life > 0:
+			Global.life -= 1
+			area.destroy()
+		elif Global.life == 0:
+			area.destroy()
+			self.destroy()
+			emit_signal("game_over")
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color

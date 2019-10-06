@@ -2,7 +2,7 @@ extends "res://Scripts/SpawnedTile.gd"
 
 signal make_it_bomb_tile(old_tile, posX, posY)
 
-export var max_point = 25
+export var max_point = 15
 export (Array, Color) var colors
 
 onready var sprite = $Sprite

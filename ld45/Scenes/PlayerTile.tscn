@@ -17,6 +17,7 @@ font_data = ExtResource( 3 )
 "player_tile",
 ]]
 script = ExtResource( 1 )
+colors = [ Color( 0.784314, 0.254902, 0.254902, 1 ), Color( 0.137255, 0.666667, 0.843137, 1 ), Color( 0.215686, 0.843137, 0.294118, 1 ), Color( 0.960784, 0.431373, 0, 1 ), Color( 0.745098, 0.745098, 0.333333, 1 ), Color( 0.568627, 0.137255, 0.431373, 1 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -35,4 +36,9 @@ text = "0"
 align = 1
 valign = 1
 
+[node name="change_color_timer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_PlayerTile_area_entered"]
+[connection signal="timeout" from="change_color_timer" to="." method="_on_change_color_timer_timeout"]

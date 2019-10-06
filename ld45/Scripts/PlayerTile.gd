@@ -1,5 +1,7 @@
 extends "res://Scripts/Tile.gd"
 
+export (Array, Color) var colors
+
 onready var sprite = $Sprite
 onready var move_point_lbl = $move_point_lbl
 
@@ -61,3 +63,7 @@ func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color
 	move_point_value = choosen_tile.move_point_value
 	move_point_lbl.text = str(choosen_tile.move_point_value)
+
+func _on_change_color_timer_timeout():
+	var pick_color = colors[randi() % colors.size()]
+	sprite.modulate = pick_color

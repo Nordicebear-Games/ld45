@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/nordicebeargames_splash_kucuk.png-d9d81c269547444757f5ce58c06a389c.stex"
+path="res://.import/nordicebeargames transparent.png-8b6abed3d9982c52a20a07a0de419a85.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://nordicebeargames_splash_kucuk.png"
-dest_files=[ "res://.import/nordicebeargames_splash_kucuk.png-d9d81c269547444757f5ce58c06a389c.stex" ]
+source_file="res://nordicebeargames transparent.png"
+dest_files=[ "res://.import/nordicebeargames transparent.png-8b6abed3d9982c52a20a07a0de419a85.stex" ]
 
 [params]
 

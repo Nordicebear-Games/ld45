@@ -34,8 +34,11 @@ func move():
 func _on_PlayerTile_area_entered(area):
 #	print(area.name)
 	if area.is_in_group("point_tile"):
-		sprite.modulate = area.choosen_color
-		move_point_lbl.text = str(area.move_point_value)
+		assign_features(area)
 		area.destroy()
 	if area.is_in_group("bomb_tile"):
 		self.destroy()
+
+func assign_features(choosen_tile):
+	sprite.modulate = choosen_tile.choosen_color
+	move_point_lbl.text = str(choosen_tile.move_point_value)

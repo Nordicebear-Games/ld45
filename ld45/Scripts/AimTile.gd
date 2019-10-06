@@ -1,5 +1,7 @@
 extends "res://Scripts/Tile.gd"
 
+signal make_it_player_tile(aim_tile, area, posX, posY)
+
 func _ready():
 	set_physics_process(true)
 
@@ -27,3 +29,8 @@ func move():
 #		print(str(grid_x) + " " + str(grid_y))
 	# Set direction back to nothing
 	dir = Vector2(0, 0)
+
+func _on_AimTile_area_entered(area):
+	if area.is_in_group("point_tile"):
+		emit_signal("make_it_player_tile", self, area, self.grid_x, self.grid_y)
+		self.destroy()

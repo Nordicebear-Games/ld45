@@ -19,7 +19,7 @@ onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
 
 var level_grid
-var player
+var ins_aim
 var bomb
 var ins_tile
 
@@ -31,7 +31,7 @@ func _ready():
 	
 	#initialize player
 	randomize()
-	initPlayer(randi()%8, grid_height / 2)
+	init_aim_tile(randi()%8, grid_height / 2)
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -58,19 +58,24 @@ func draw_level():
 func _signal_connect(which_tile):
 	if which_tile == "point_tile":
 		ins_tile.connect("make_it_bomb_tile", self, "from_point_to_bomb")
+	if which_tile == "aim_tile":
+		ins_aim.connect("make_it_player_tile", self, "from_aim_to_player")
 
-func initPlayer(posX, posY):
-	# Initialize the player
-	player = player_tile.instance()
+func init_aim_tile(posX, posY):
+	# Initialize the aim
+	ins_aim = aim_tile.instance()
 	
 	# Add the tile object to the game
-	add_child(player)
+	add_child(ins_aim)
 	
-	# Set position and player variables
-	var player_position = grid_to_pixel(posX, posY)
-	player.position = Vector2(player_position[0], player_position[1])
-	player.grid_x = posX
-	player.grid_y =  posY
+	#signal connect
+	_signal_connect("aim_tile")
+	
+	# Set position and aim variables
+	var aim_position = grid_to_pixel(posX, posY)
+	ins_aim.position = Vector2(aim_position[0], aim_position[1])
+	ins_aim.grid_x = posX
+	ins_aim.grid_y =  posY
 
 func _on_SpawnObjectTimer_timeout():
 	chooseTileAndInit()
@@ -99,10 +104,23 @@ func pick_rand_number():
 	randomize()
 	return randi()%100 + 1
 
-func from_point_to_bomb(old_tile, posX, posY): #change point tile as bomb tile when move point is 0
+func from_aim_to_player(aim_tile, choosen_tile, posX, posY):
+	#instance player tile
+	var ins_player_tile = player_tile.instance()
+#	call_deferred("add_child", ins_player_tile)
+	add_child(ins_player_tile)
+	#assign position
+	initTile(ins_player_tile, posX, posY)
+	#assign features
+	ins_player_tile.assign_features(choosen_tile)
+	#destroy unused tiles
+	choosen_tile.destroy()
+
+func from_point_to_bomb(point_tile, posX, posY): #change point tile as bomb tile when move point is 0
 	#instance bomb tile
 	var ins_bomb_tile = bomb_tile.instance()
 	tile_con.add_child(ins_bomb_tile)
+	#assign position
 	initTile(ins_bomb_tile, posX, posY)
-	#destroy old tile
-	old_tile.destroy()
+	#destroy old point tile
+	point_tile.destroy()

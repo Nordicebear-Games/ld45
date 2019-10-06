@@ -17,4 +17,4 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="." to="." method="_on_PlayerTile_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_AimTile_area_entered"]

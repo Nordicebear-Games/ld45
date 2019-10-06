@@ -21,8 +21,8 @@ special_tiles = [ ExtResource( 7 ), ExtResource( 6 ) ]
 
 [node name="TileContainer" type="Node2D" parent="."]
 
-[node name="SpawnObjectTimer" type="Timer" parent="."]
+[node name="SpawnTileTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="SpawnObjectTimer" to="." method="_on_SpawnObjectTimer_timeout"]
+[connection signal="timeout" from="SpawnTileTimer" to="." method="_on_SpawnTileTimer_timeout"]

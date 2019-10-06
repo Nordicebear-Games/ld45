@@ -37,5 +37,4 @@ func _on_point_timer_timeout():
 	move_point("reduce")
 
 func _on_PointTile_area_entered(area):
-	if area.is_in_group("bomb_tile"):
-		self.destroy()
+	self.destroy()

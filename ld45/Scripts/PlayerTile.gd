@@ -55,7 +55,7 @@ func _on_PlayerTile_area_entered(area):
 		# assign move point value
 		move_point_lbl.text = str(move_point_value)
 		#destroy point tile
-		area.destroy()
+#		area.destroy()
 	if area.is_in_group("bomb_tile"):
 		self.destroy()
 

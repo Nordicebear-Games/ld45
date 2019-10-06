@@ -8,6 +8,7 @@ export (PackedScene) var bomb_tile
 export (Array, PackedScene) var special_tiles
 
 #Customizable level data
+export (int) var max_point_tile_in_a_row = 5
 export (int) var grid_width = 8
 export (int) var grid_height = 10
 export (int) var x_start = 50
@@ -76,8 +77,12 @@ func init_aim_tile(posX, posY):
 	ins_aim.grid_x = posX
 	ins_aim.grid_y =  posY
 
-func _on_SpawnObjectTimer_timeout():
-	chooseTileAndInit()
+func _on_SpawnTileTimer_timeout():
+	randomize()
+	var rand_spawn_rate = randi()%max_point_tile_in_a_row
+	print(rand_spawn_rate)
+	for i in rand_spawn_rate:
+		chooseTileAndInit()
 
 func chooseTileAndInit():
 	var rand_number = pick_rand_number()

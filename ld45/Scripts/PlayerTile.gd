@@ -24,11 +24,16 @@ func move():
 		dir = Vector2(-1, 0)
 
 	# Move the player to the new position
-	if (dir != Vector2(0, 0)):
+	if (dir != Vector2(0, 0) && move_point_value != 0):
 		var target = Vector2(grid_x + dir[0], grid_y + dir[1])
 		self.position = grid_to_pixel(target[0], target[1])
 		grid_x = target[0]
 		grid_y = target[1]
+		#reduce move point after every move
+		move_point_value -= 1
+		if move_point_value < 0:
+			move_point_value = 0
+		move_point_lbl.text = str(move_point_value)
 #		print(str(grid_x) + " " + str(grid_y))
 	# Set direction back to nothing
 	dir = Vector2(0, 0)

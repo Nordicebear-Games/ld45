@@ -1,7 +1,10 @@
 extends Node2D
 
-#Customizable level data
+#Spawn rates
 export (int) var max_tile_in_a_row = 5
+export (int) var special_tile_rate = 5
+
+#Customizable level data
 export (int) var grid_width = 8
 export (int) var grid_height = 10
 export (int) var x_start = 20
@@ -86,9 +89,9 @@ func _on_SpawnTileTimer_timeout():
 
 func chooseTileAndInit():
 	var rand_number = pick_rand_number()
-	if rand_number < 10: #instance life or bomb tile
+	if rand_number < special_tile_rate: #instance special tile
 		ins_tile = special_tiles[randi() % special_tiles.size()].instance()
-	else:
+	else: #instance point tile
 		ins_tile = point_tile.instance()
 		_signal_connect("point_tile")
 

@@ -36,7 +36,8 @@ func move():
 		if move_point_value < 0:
 			move_point_value = 0
 		move_point_lbl.text = str(move_point_value)
-#		print(str(grid_x) + " " + str(grid_y))
+#		increase score after every successfull move
+		Global.score += 1
 	# Set direction back to nothing
 	dir = Vector2(0, 0)
 
@@ -46,6 +47,8 @@ func _on_PlayerTile_area_entered(area):
 		#color control
 		if sprite.modulate == area.choosen_color:
 			move_point_value += area.move_point_value
+	#		increase score after every succesfull point tile grab
+			Global.score += area.move_point_value
 		else:
 			move_point_value -= area.move_point_value
 			if move_point_value < 0:
@@ -54,8 +57,6 @@ func _on_PlayerTile_area_entered(area):
 		sprite.modulate = area.choosen_color
 		# assign move point value
 		move_point_lbl.text = str(move_point_value)
-		#destroy point tile
-#		area.destroy()
 	if area.is_in_group("bomb_tile"):
 		self.destroy()
 

@@ -21,6 +21,10 @@ boot_splash/image="res://nordicebeargames_splash_kucuk.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Globals/Global.gd"
+
 [display]
 
 window/size/width=370

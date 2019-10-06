@@ -1,6 +1,6 @@
 extends Node2D
 
-export (String) var tile_type
+#export (String) var tile_type
 
 export (int) var grid_width = 8
 export (int) var grid_height = 10

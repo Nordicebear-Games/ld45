@@ -1,4 +1,6 @@
 extends "res://Scripts/Tile.gd"
+signal game_over
+
 
 export (Array, Color) var colors
 
@@ -59,6 +61,7 @@ func _on_PlayerTile_area_entered(area):
 		move_point_lbl.text = str(move_point_value)
 	if area.is_in_group("bomb_tile"):
 		self.destroy()
+		emit_signal("game_over")
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color

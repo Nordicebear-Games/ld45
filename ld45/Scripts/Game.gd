@@ -20,12 +20,14 @@ export (PackedScene) var point_tile
 export (PackedScene) var bomb_tile
 export (Array, PackedScene) var special_tiles
 
+onready var hud = $HUD
 onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
 
 var level_grid
 var ins_aim
 var ins_tile
+var ins_player_tile
 
 func _ready():
 	initGrid()
@@ -60,6 +62,8 @@ func draw_level():
 				tile.position = Vector2(pos[0], pos[1])
 
 func _signal_connect(which_tile):
+	if which_tile == "player_tile":
+		ins_player_tile.connect("game_over", hud, "game_over")
 	if which_tile == "point_tile":
 		ins_tile.connect("make_it_bomb_tile", self, "from_point_to_bomb")
 	if which_tile == "aim_tile":
@@ -68,13 +72,10 @@ func _signal_connect(which_tile):
 func init_aim_tile(posX, posY):
 	# Initialize the aim
 	ins_aim = aim_tile.instance()
-	
 	# Add the tile object to the game
 	add_child(ins_aim)
-	
 	#signal connect
 	_signal_connect("aim_tile")
-	
 	# Set position and aim variables
 	var aim_position = grid_to_pixel(posX, posY)
 	ins_aim.position = Vector2(aim_position[0], aim_position[1])
@@ -97,7 +98,7 @@ func chooseTileAndInit():
 	else: #instance point tile
 		ins_tile = point_tile.instance()
 		_signal_connect("point_tile")
-
+	#add to tile container
 	tile_con.add_child(ins_tile)
 	#initialize the choosen object
 	randomize()
@@ -116,13 +117,15 @@ func pick_rand_number():
 
 func from_aim_to_player(aim_tile, choosen_tile, posX, posY):
 	#instance player tile
-	var ins_player_tile = player_tile.instance()
+	ins_player_tile = player_tile.instance()
 #	call_deferred("add_child", ins_player_tile)
 	add_child(ins_player_tile)
 	#assign position
 	initTile(ins_player_tile, posX, posY)
 	#assign features
 	ins_player_tile.assign_features(choosen_tile)
+	#signal connect
+	_signal_connect("player_tile")
 	#destroy unused tiles
 	choosen_tile.destroy()
 

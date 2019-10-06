@@ -1,10 +1,11 @@
 extends "res://Scripts/Tile.gd"
 
-signal make_it_player_tile(aim_tile, area, posX, posY)
+signal make_it_player_tile(area, posX, posY)
 
 func _ready():
 	set_physics_process(true)
 
+#warning-ignore:unused_argument
 func _physics_process(delta):
 	move()
 
@@ -28,5 +29,5 @@ func move():
 
 func _on_AimTile_area_entered(area):
 	if area.is_in_group("point_tile"):
-		emit_signal("make_it_player_tile", self, area, self.grid_x, self.grid_y)
+		emit_signal("make_it_player_tile", area, self.grid_x, self.grid_y)
 		self.destroy()

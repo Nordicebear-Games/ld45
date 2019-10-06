@@ -47,6 +47,7 @@ func initGrid():
 	level_grid = []
 	for i in range(grid_width):
 		level_grid.append([])
+		#warning-ignore:unused_variable
 		for j in range(grid_height):
 			level_grid[i].append(0)
 
@@ -118,7 +119,7 @@ func pick_rand_number():
 	randomize()
 	return randi()%100 + 1
 
-func from_aim_to_player(aim_tile, choosen_tile, posX, posY):
+func from_aim_to_player(choosen_tile, posX, posY):
 	#instance player tile
 	ins_player_tile = player_tile.instance()
 #	call_deferred("add_child", ins_player_tile)

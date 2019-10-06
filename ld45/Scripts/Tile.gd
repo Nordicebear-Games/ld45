@@ -1,10 +1,12 @@
 extends Node2D
 
-#export (String) var tile_type
-
+#warning-ignore:unused_class_variable
 export (int) var grid_width = 8
+#warning-ignore:unused_class_variable
 export (int) var grid_height = 10
+#warning-ignore:unused_class_variable
 export (int) var x_start = 20
+#warning-ignore:unused_class_variable
 export (int) var y_start = 15
 export (int) var x_off = 32
 export (int) var y_off = 32

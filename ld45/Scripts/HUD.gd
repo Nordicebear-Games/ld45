@@ -6,6 +6,7 @@ onready var highscore_lbl = $GameOver_HUD/highscore_lbl
 
 var highscore = 0
 
+#warning-ignore:unused_argument
 func _process(delta):
 	score_lbl.text = "Score: " + str(Global.score)
 

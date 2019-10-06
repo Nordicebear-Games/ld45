@@ -1,5 +1,6 @@
 extends "res://Scripts/Tile.gd"
 
+#warning-ignore:unused_class_variable
 onready var move_timer = $move_timer
 
 func _on_move_timer_timeout():

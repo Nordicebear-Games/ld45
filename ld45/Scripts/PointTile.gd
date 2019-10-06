@@ -36,5 +36,6 @@ func move_point(con):
 func _on_point_timer_timeout():
 	move_point("reduce")
 
+#warning-ignore:unused_argument
 func _on_PointTile_area_entered(area):
 	self.destroy()

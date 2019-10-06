@@ -1,6 +1,7 @@
 extends Node
 
 #GLOBAL VARIABLES
+#warning-ignore:unused_class_variable
 var score = 0
 
 #SCENE MANAGER
@@ -41,7 +42,8 @@ func load_highscore():
 	var save_file = File.new()
 	if !save_file.file_exists(SAVE_HS_FILE_PATH):
 		return 0
-		
+	
+	#warning-ignore:unused_variable
 	var highscore
 	
 	save_file.open(SAVE_HS_FILE_PATH, File.READ)

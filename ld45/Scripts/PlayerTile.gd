@@ -1,6 +1,6 @@
 extends "res://Scripts/Tile.gd"
-signal game_over
 
+signal game_over
 
 export (Array, Color) var colors
 
@@ -12,6 +12,7 @@ var move_point_value = 0
 func _ready():
 	set_physics_process(true)
 
+#warning-ignore:unused_argument
 func _physics_process(delta):
 	move()
 

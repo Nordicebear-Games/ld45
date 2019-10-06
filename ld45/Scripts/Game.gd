@@ -20,7 +20,6 @@ onready var tile_con = $TileContainer
 
 var level_grid
 var ins_aim
-#var bomb
 var ins_tile
 
 func _ready():
@@ -29,9 +28,9 @@ func _ready():
 	# This function will do more when there are more tile types
 	draw_level()
 	
-	#initialize player
+	#initialize aim
 	randomize()
-	init_aim_tile(randi()%8, grid_height / 2)
+	init_aim_tile(randi()%grid_width, grid_height / 2)
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -91,7 +90,7 @@ func chooseTileAndInit():
 	tile_con.add_child(ins_tile)
 	#initialize the choosen object
 	randomize()
-	initTile(ins_tile, randi()%8, 0)
+	initTile(ins_tile, randi()%grid_width, 0)
 
 func initTile(whichTile, tilePosX, tilePosY):
 	# Set position and tile object variables

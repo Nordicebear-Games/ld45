@@ -54,6 +54,7 @@ position = Vector2( -10, -10 )
 scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 4 )
 
+[connection signal="area_entered" from="." to="." method="_on_PointTile_area_entered"]
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
 [connection signal="timeout" from="point_timer" to="." method="_on_point_timer_timeout"]
 [connection signal="screen_exited" from="visibility" to="." method="_on_visibility_screen_exited"]

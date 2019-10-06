@@ -1,6 +1,7 @@
 extends Node2D
 
 export (PackedScene) var default_tile
+export (PackedScene) var aim_tile
 export (PackedScene) var player_tile
 export (PackedScene) var point_tile
 export (PackedScene) var bomb_tile

@@ -23,7 +23,7 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=320
+window/size/width=370
 window/size/height=320
 
 [rendering]
@@ -31,5 +31,5 @@ window/size/height=320
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.133333, 0.658824, 0.843137, 1 )
+environment/default_clear_color=Color( 0.117647, 0.117647, 0.117647, 1 )
 environment/default_environment="res://default_env.tres"

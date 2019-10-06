@@ -1,20 +1,20 @@
 extends Node2D
 
+#Customizable level data
+export (int) var max_tile_in_a_row = 5
+export (int) var grid_width = 8
+export (int) var grid_height = 10
+export (int) var x_start = 20
+export (int) var y_start = 15
+export (int) var x_off = 32
+export (int) var y_off = 32
+
 export (PackedScene) var default_tile
 export (PackedScene) var aim_tile
 export (PackedScene) var player_tile
 export (PackedScene) var point_tile
 export (PackedScene) var bomb_tile
 export (Array, PackedScene) var special_tiles
-
-#Customizable level data
-export (int) var max_point_tile_in_a_row = 5
-export (int) var grid_width = 8
-export (int) var grid_height = 10
-export (int) var x_start = 50
-export (int) var y_start = 15
-export (int) var x_off = 32
-export (int) var y_off = 32
 
 onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
@@ -79,7 +79,7 @@ func init_aim_tile(posX, posY):
 
 func _on_SpawnTileTimer_timeout():
 	randomize()
-	var rand_spawn_rate = randi()%max_point_tile_in_a_row
+	var rand_spawn_rate = randi()%max_tile_in_a_row
 	print(rand_spawn_rate)
 	for i in rand_spawn_rate:
 		chooseTileAndInit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/DefaultTile.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/PointTile.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BombTile.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/LifeTile.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,6 +17,8 @@ player_tile = ExtResource( 4 )
 point_tile = ExtResource( 5 )
 bomb_tile = ExtResource( 6 )
 special_tiles = [ ExtResource( 7 ), ExtResource( 6 ) ]
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
 
 [node name="DefaultTileContainer" type="Node2D" parent="."]
 

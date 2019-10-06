@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/PointTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/point_tile.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Textures/ColorBlindTextures/colorblind_purple.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.7236, 13.7625 )
@@ -17,7 +18,7 @@ font_data = ExtResource( 3 )
 "point_tile",
 ]]
 script = ExtResource( 1 )
-colors = [ Color( 0.776471, 0.25098, 0.25098, 1 ), Color( 0.133333, 0.658824, 0.843137, 1 ), Color( 0.223529, 0.839216, 0.290196, 1 ), Color( 0.968627, 0.423529, 0, 1 ), Color( 0.74902, 0.745098, 0.341176, 1 ), Color( 0.572549, 0.137255, 0.827451, 1 ), Color( 0.780392, 0.172549, 0.541176, 1 ) ]
+colors = [ Color( 0.776471, 0.25098, 0.25098, 1 ), Color( 0.133333, 0.658824, 0.843137, 1 ), Color( 0.223529, 0.839216, 0.290196, 1 ), Color( 0.968627, 0.423529, 0, 1 ), Color( 0.74902, 0.745098, 0.341176, 1 ), Color( 0.572549, 0.137255, 0.827451, 1 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -46,6 +47,12 @@ autostart = true
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 scale = Vector2( 1.56, 1.6 )
+
+[node name="ColorBlindSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -10, -10 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 4 )
 
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
 [connection signal="timeout" from="point_timer" to="." method="_on_point_timer_timeout"]

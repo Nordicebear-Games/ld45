@@ -20,7 +20,7 @@ onready var tile_con = $TileContainer
 
 var level_grid
 var ins_aim
-var bomb
+#var bomb
 var ins_tile
 
 func _ready():

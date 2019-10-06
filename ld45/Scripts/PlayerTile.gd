@@ -3,6 +3,8 @@ extends "res://Scripts/Tile.gd"
 onready var sprite = $Sprite
 onready var move_point_lbl = $move_point_lbl
 
+var move_point_value = 0
+
 func _ready():
 	set_physics_process(true)
 
@@ -32,13 +34,25 @@ func move():
 	dir = Vector2(0, 0)
 
 func _on_PlayerTile_area_entered(area):
-#	print(area.name)
+#	print("player tile area")
 	if area.is_in_group("point_tile"):
-		assign_features(area)
+		#color control
+		if sprite.modulate == area.choosen_color:
+			move_point_value += area.move_point_value
+		else:
+			move_point_value -= area.move_point_value
+			if move_point_value < 0:
+				move_point_value = 0
+		#change color
+		sprite.modulate = area.choosen_color
+		# assign move point value
+		move_point_lbl.text = str(move_point_value)
+		#destroy point tile
 		area.destroy()
 	if area.is_in_group("bomb_tile"):
 		self.destroy()
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color
+	move_point_value = choosen_tile.move_point_value
 	move_point_lbl.text = str(choosen_tile.move_point_value)

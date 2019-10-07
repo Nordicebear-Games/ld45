@@ -31,6 +31,8 @@ Tutorial="*res://Tutorial/Tutorial.tscn"
 
 window/size/width=370
 window/size/height=320
+window/handheld/orientation="portrait"
+window/stretch/mode="2d"
 
 [input]
 

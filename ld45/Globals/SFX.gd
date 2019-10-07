@@ -1,6 +1,8 @@
 extends Control
 
 #warning-ignore:unused_class_variable
+onready var game_start_sound = $game_start_sound
+#warning-ignore:unused_class_variable
 onready var game_over_sound = $game_over_sound
 #warning-ignore:unused_class_variable
 onready var player_move_sound = $player_move_sound

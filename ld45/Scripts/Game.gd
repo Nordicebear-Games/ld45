@@ -3,7 +3,7 @@ extends Node2D
 #Spawn rates
 export (int) var max_tile_in_a_row = 8
 export (int) var special_tile_percent = 5
-export (int) var bomb_tile_percent = 15
+export (int) var bomb_tile_percent = 20
 
 #Customizable level data
 export (int) var grid_width = 8
@@ -129,6 +129,7 @@ func pick_rand_number():
 	return randi()%100 + 1
 
 func from_aim_to_player(choosen_tile, posX, posY):
+	SFX.game_start_sound.play()
 	#instance player tile
 	ins_player_tile = player_tile.instance()
 #	call_deferred("add_child", ins_player_tile)

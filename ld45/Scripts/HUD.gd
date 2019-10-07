@@ -28,6 +28,7 @@ func game_over():
 	gameover_hud.visible = true
 	assing_highscore(Global.score)
 	gameover_anim.play("anim")
+	get_tree().paused = true #pause game
 
 func _on_restart_btn_pressed():
 	gameover_hud.visible = false

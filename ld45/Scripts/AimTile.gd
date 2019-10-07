@@ -23,6 +23,8 @@ func move():
 		self.position = grid_to_pixel(target[0], target[1])
 		grid_x = target[0]
 		grid_y = target[1]
+		#move sound
+		SFX.player_move_sound.play()
 #		print(str(grid_x) + " " + str(grid_y))
 	# Set direction back to nothing
 	dir = Vector2(0, 0)

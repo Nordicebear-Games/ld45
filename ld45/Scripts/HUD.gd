@@ -25,12 +25,14 @@ func assing_highscore(value):
 		highscore_lbl.text = "Highscore: " + highscore # assign high score to text
 
 func game_over():
+	SFX.game_over_sound.play()
 	gameover_hud.visible = true
 	assing_highscore(Global.score)
 	gameover_anim.play("anim")
 	get_tree().paused = true #pause game
 
 func _on_restart_btn_pressed():
+	SFX.button_sound.play()
 	gameover_hud.visible = false
 	gameover_anim.stop()
 	Global.change_scene("Game")

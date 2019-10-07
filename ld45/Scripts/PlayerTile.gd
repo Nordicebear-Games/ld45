@@ -46,8 +46,9 @@ func move():
 		if move_point_value < 0:
 			move_point_value = 0
 		move_point_lbl.text = str(move_point_value)
-#		increase score after every successfull move
+#		increase score after every move
 		Global.score += 1
+		SFX.player_move_sound.play()
 	# Set direction back to nothing
 	dir = Vector2(0, 0)
 
@@ -55,10 +56,12 @@ func _on_PlayerTile_area_entered(area):
 	if area.is_in_group("point_tile"):
 		#color control
 		if sprite.modulate == area.choosen_color:
+			SFX.gain_point_sound.play()
 			move_point_value += area.move_point_value
 	#		increase score after every succesfull point tile grab
 			Global.score += area.move_point_value
 		else:
+			SFX.lose_point_sound.play()
 			move_point_value -= area.move_point_value
 			if move_point_value < 0:
 				move_point_value = 0
@@ -68,19 +71,23 @@ func _on_PlayerTile_area_entered(area):
 		move_point_lbl.text = str(move_point_value)
 	
 	if area.is_in_group("life_tile"):
+		SFX.life_sound.play()
 		Global.life += 1
 		area.destroy()
 	
 	if area.is_in_group("bomb_tile"):
 		if Global.life > 0:
+			SFX.bomb_sound.play()
 			Global.life -= 1
 			area.destroy()
 		elif Global.life == 0:
+			SFX.bomb_sound.play()
 			area.destroy()
 			self.destroy()
 			emit_signal("game_over")
 	
 	if area.is_in_group("stock_point_tile"):
+		SFX.stock_point_sound.play()
 		Global.stocked_points += randi()%5 + 1
 		area.destroy()
 

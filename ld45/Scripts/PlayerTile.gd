@@ -6,11 +6,13 @@ export (Array, Color) var colors
 
 onready var sprite = $Sprite
 onready var move_point_lbl = $move_point_lbl
+onready var notifier_anim = $notifier_sprite/AnimationPlayer
 
 var move_point_value = 0
 
 func _ready():
 	set_physics_process(true)
+	notifier_anim.play("notifier")
 
 #warning-ignore:unused_argument
 func _physics_process(delta):

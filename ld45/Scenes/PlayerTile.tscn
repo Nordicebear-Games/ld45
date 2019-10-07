@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/PlayerTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/player_tile.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Textures/player_notifier.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.0693, 14.2292 )
@@ -12,6 +13,22 @@ size = 20
 outline_size = 1
 outline_color = Color( 0.701961, 0.701961, 0.701961, 1 )
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "notifier"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [node name="PlayerTile" type="Area2D" groups=[
 "player_tile",
@@ -39,6 +56,14 @@ valign = 1
 [node name="change_color_timer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
+
+[node name="notifier_sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="notifier_sprite"]
+anims/notifier = SubResource( 3 )
 
 [connection signal="area_entered" from="." to="." method="_on_PlayerTile_area_entered"]
 [connection signal="timeout" from="change_color_timer" to="." method="_on_change_color_timer_timeout"]

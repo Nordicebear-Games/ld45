@@ -2,6 +2,7 @@ extends CanvasLayer
 
 onready var score_lbl = $Game_HUD/score_lbl
 onready var life_lbl = $Game_HUD/life_sprite/life_lbl
+onready var stock_point_lbl = $Game_HUD/stock_point_sprite/stock_point_lbl
 onready var gameover_hud = $GameOver_HUD
 onready var highscore_lbl = $GameOver_HUD/highscore_lbl
 
@@ -11,6 +12,7 @@ var highscore = 0
 func _process(delta):
 	score_lbl.text = "Score: " + str(Global.score)
 	life_lbl.text = str(Global.life)
+	stock_point_lbl.text = str(Global.stocked_points)
 
 func assing_highscore(value):
 		Global.save_highscore(value)

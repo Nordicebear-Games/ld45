@@ -5,6 +5,8 @@ extends Node
 var score = 0
 #warning-ignore:unused_class_variable
 var life = 0
+#warning-ignore:unused_class_variable
+var stocked_points = 0
 
 #SCENE MANAGER
 const SCENE_PATH = "res://Scenes/"

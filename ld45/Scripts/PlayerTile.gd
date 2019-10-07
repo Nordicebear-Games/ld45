@@ -17,6 +17,11 @@ func _physics_process(delta):
 	move()
 
 func move():
+	#use stocked points
+	if Input.is_action_just_pressed("use_stocked_points"):
+		move_point_value += Global.stocked_points
+		move_point_lbl.text = str(move_point_value)
+		Global.stocked_points = 0
 	# Calculate the direction the player is trying to go
 	var dir = Vector2(0, 0)
 	if (Input.is_action_just_pressed("ui_up") && grid_y > 0):
@@ -72,6 +77,10 @@ func _on_PlayerTile_area_entered(area):
 			area.destroy()
 			self.destroy()
 			emit_signal("game_over")
+	
+	if area.is_in_group("stock_point_tile"):
+		Global.stocked_points += randi()%5 + 1
+		area.destroy()
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color

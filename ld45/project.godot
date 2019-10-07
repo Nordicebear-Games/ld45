@@ -30,6 +30,14 @@ Global="*res://Globals/Global.gd"
 window/size/width=370
 window/size/height=320
 
+[input]
+
+use_stocked_points={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

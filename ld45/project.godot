@@ -25,6 +25,7 @@ config/icon="res://icon.png"
 
 Global="*res://Globals/Global.gd"
 SFX="*res://Globals/SFX.tscn"
+Tutorial="*res://Tutorial/Tutorial.tscn"
 
 [display]
 

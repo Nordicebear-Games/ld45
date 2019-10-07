@@ -47,6 +47,9 @@ func _ready():
 	
 	#set default background color
 	VisualServer.set_default_clear_color(Color(0.3, 0.3, 0.3))
+	
+	#show tutorial (1)
+	Tutorial.tutorial_part("start")
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -142,6 +145,9 @@ func from_aim_to_player(choosen_tile, posX, posY):
 	_signal_connect("player_tile")
 	#destroy unused tiles
 	choosen_tile.destroy()
+	
+	#show tutorial (2)
+	Tutorial.tutorial_part("aim_to_player")
 
 func from_point_to_bomb(point_tile, posX, posY): #change point tile as bomb tile when move point is 0
 	#instance bomb tile

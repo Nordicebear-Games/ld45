@@ -25,6 +25,10 @@ func move():
 		move_point_value += Global.stocked_points
 		move_point_lbl.text = str(move_point_value)
 		Global.stocked_points = 0
+
+		#show tutorial (4)
+		Tutorial.tutorial_part("piggy_bank_used")
+
 	# Calculate the direction the player is trying to go
 	var dir = Vector2(0, 0)
 	if (Input.is_action_just_pressed("ui_up") && grid_y > 0):
@@ -50,6 +54,7 @@ func move():
 #		increase score after every move
 		Global.score += 1
 		SFX.player_move_sound.play()
+
 	# Set direction back to nothing
 	dir = Vector2(0, 0)
 
@@ -61,11 +66,17 @@ func _on_PlayerTile_area_entered(area):
 			move_point_value += area.move_point_value
 	#		increase score after every succesfull point tile grab
 			Global.score += area.move_point_value
+			
+			#show tutorial
+			Tutorial.tutorial_part("same_colored_point_tile")
 		else:
 			SFX.lose_point_sound.play()
 			move_point_value -= area.move_point_value
 			if move_point_value < 0:
 				move_point_value = 0
+			
+			#show tutorial
+			Tutorial.tutorial_part("wrong_colored_point_tile")
 		#change color
 		sprite.modulate = area.choosen_color
 		VisualServer.set_default_clear_color(sprite.modulate)
@@ -76,7 +87,10 @@ func _on_PlayerTile_area_entered(area):
 		SFX.life_sound.play()
 		Global.life += 1
 		area.destroy()
-	
+		
+		#show tutorial (5)
+		Tutorial.tutorial_part("life_grabbed")
+
 	if area.is_in_group("bomb_tile"):
 		if Global.life > 0:
 			SFX.bomb_sound.play()
@@ -92,6 +106,9 @@ func _on_PlayerTile_area_entered(area):
 		SFX.stock_point_sound.play()
 		Global.stocked_points += randi()%5 + 1
 		area.destroy()
+		
+		#show tutorial (3)
+		Tutorial.tutorial_part("piggy_bank_grabbed")
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color

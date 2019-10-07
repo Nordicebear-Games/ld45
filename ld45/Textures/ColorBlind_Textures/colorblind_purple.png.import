@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/colorblind_purple.png-be37acac4bb648fb162189bcf0eae997.stex"
+path="res://.import/colorblind_purple.png-0fcd1f57433cbb79cbded9b280c7e57b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/ColorBlindTextures/colorblind_purple.png"
-dest_files=[ "res://.import/colorblind_purple.png-be37acac4bb648fb162189bcf0eae997.stex" ]
+source_file="res://Textures/ColorBlind_Textures/colorblind_purple.png"
+dest_files=[ "res://.import/colorblind_purple.png-0fcd1f57433cbb79cbded9b280c7e57b.stex" ]
 
 [params]
 

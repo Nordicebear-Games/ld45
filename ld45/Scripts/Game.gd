@@ -2,8 +2,8 @@ extends Node2D
 
 #Spawn rates
 export (int) var max_tile_in_a_row = 8
-export (int) var special_tile_percent = 8
-export (int) var bomb_tile_percent = 12
+export (int) var special_tile_percent = 5
+export (int) var bomb_tile_percent = 15
 
 #Customizable level data
 export (int) var grid_width = 8

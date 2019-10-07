@@ -5,12 +5,13 @@ onready var life_lbl = $Game_HUD/life_sprite/life_lbl
 onready var stock_point_lbl = $Game_HUD/stock_point_sprite/stock_point_lbl
 onready var gameover_hud = $GameOver_HUD
 onready var highscore_lbl = $GameOver_HUD/highscore_lbl
-onready var anim = $AnimationPlayer
+onready var hud_anim = $hud_anim
+onready var gameover_anim = $GameOver_HUD/gameover_anim
 
 var highscore = 0
 
 func _ready():
-	anim.play("anim")
+	hud_anim.play("anim")
 
 #warning-ignore:unused_argument
 func _process(delta):
@@ -26,7 +27,9 @@ func assing_highscore(value):
 func game_over():
 	gameover_hud.visible = true
 	assing_highscore(Global.score)
+	gameover_anim.play("anim")
 
 func _on_restart_btn_pressed():
 	gameover_hud.visible = false
+	gameover_anim.stop()
 	Global.change_scene("Game")

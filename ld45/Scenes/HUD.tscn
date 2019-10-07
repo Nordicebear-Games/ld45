@@ -126,8 +126,7 @@ align = 1
 valign = 1
 
 [node name="stock_point_sprite" type="Sprite" parent="Game_HUD"]
-editor/display_folded = true
-position = Vector2( 317, 150 )
+position = Vector2( 317, 145 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 4 )
 vframes = 2

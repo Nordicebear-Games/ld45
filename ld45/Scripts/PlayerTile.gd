@@ -101,6 +101,9 @@ func _on_PlayerTile_area_entered(area):
 			area.destroy()
 			self.destroy()
 			emit_signal("game_over")
+		
+		#show tutorial
+		Tutorial.tutorial_part("bomb_exploded")
 	
 	if area.is_in_group("stock_point_tile"):
 		SFX.stock_point_sound.play()
@@ -120,3 +123,5 @@ func _on_change_color_timer_timeout():
 	var pick_color = colors[randi() % colors.size()]
 	sprite.modulate = pick_color
 	VisualServer.set_default_clear_color(sprite.modulate)
+	#show tutorial
+	Tutorial.tutorial_part("color_changed")

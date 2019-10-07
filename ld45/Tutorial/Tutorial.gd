@@ -7,15 +7,17 @@ var dialog = [
 	"Welcome to til0x.",
 	"Move your aim with left and right arrow keys and grab the tile which coming towards you.",
 	"Tip: Choose a high numbered tile",
-	"Now you have your own tile. The number of the center means your move count. if it's 0 you can't move.",
-	"With your own tile  you can move now and down too but after every move, move count'll reduce.",
-	"You have no life or extra points for now.",
-	"You can gain them. If you grab a life tile or piggy bank tile. Try if you see one.",
+	"You have your own tile now. The number of the center means your move count. if it'll 0 you can't move.",
+	"With your own tile  you can move 'up' and 'down' too but after every move, move count'll reduce.",
+	"Piggy bank give you extra points to use later. Grab it if you see one.",
+	"You can gain extra life. If you grab a life tile. Grab it if you see one.",
 	"You grabbed piggy bank tile, press 'S' to use it. Tip: Use this wisely.",
 	"Piggy bank used and move count increased now.",
 	"You grabbed a life tile and this gave you an extra life.",
 	"You grabbed same colored point tile. Your move count increased!",
-	"You grabbed wrong colored point tile. Your move count reduced!"]
+	"You grabbed wrong colored point tile. Your move count reduced!",
+	"Color changed. Tip: Color changes every 30 seconds.",
+	"Bomb exploded. Tip:Stay away from bombs."]
 var page = 0
 
 # Functions
@@ -49,50 +51,54 @@ func tutorial_part(part):
 	if part == "start":
 		tutorial("show")
 		game("stop")
-		yield(get_tree().create_timer(3), "timeout")
+		yield(get_tree().create_timer(2), "timeout")
 		show_tut_page(1)
 		yield(get_tree().create_timer(5), "timeout")
 		show_tut_page(2)
-		yield(get_tree().create_timer(3), "timeout")
 		game("continue")
+		yield(get_tree().create_timer(3), "timeout")
+		show_tut_page(5)
+		yield(get_tree().create_timer(5), "timeout")
+		show_tut_page(6)
 
 	if part == "aim_to_player":
-		game("stop")
+#		game("stop")
 		show_tut_page(3)
 		yield(get_tree().create_timer(8), "timeout")
 		show_tut_page(4)
 		yield(get_tree().create_timer(6), "timeout")
-		show_tut_page(5)
-		yield(get_tree().create_timer(5), "timeout")
-		show_tut_page(6)
-		yield(get_tree().create_timer(5), "timeout")
-		game("continue")
+#		yield(get_tree().create_timer(5), "timeout")
+#		game("continue")
 
 	if part == "piggy_bank_grabbed":
-		game("stop")
+#		game("stop")
 		show_tut_page(7)
-		yield(get_tree().create_timer(8), "timeout")
-		game("continue")
+#		yield(get_tree().create_timer(8), "timeout")
+#		game("continue")
 
 	if part == "piggy_bank_used":
-		game("stop")
+#		game("stop")
 		show_tut_page(8)
-		yield(get_tree().create_timer(5), "timeout")
-		game("continue")
+#		yield(get_tree().create_timer(5), "timeout")
+#		game("continue")
 
 	if part == "life_grabbed":
-		game("stop")
+#		game("stop")
 		show_tut_page(9)
-		yield(get_tree().create_timer(5), "timeout")
-		game("continue")
+#		yield(get_tree().create_timer(5), "timeout")
+#		game("continue")
 
 	if part == "same_colored_point_tile":
 		show_tut_page(10)
-#		yield(get_tree().create_timer(5), "timeout")
 
 	if part == "wrong_colored_point_tile":
 		show_tut_page(11)
-#		yield(get_tree().create_timer(5), "timeout")
+
+	if part == "color_changed":
+		show_tut_page(12)
+	
+	if part == "bomb_exploded":
+		show_tut_page(13)
 
 
 

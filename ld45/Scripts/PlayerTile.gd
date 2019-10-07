@@ -67,6 +67,7 @@ func _on_PlayerTile_area_entered(area):
 				move_point_value = 0
 		#change color
 		sprite.modulate = area.choosen_color
+		VisualServer.set_default_clear_color(sprite.modulate)
 		# assign move point value
 		move_point_lbl.text = str(move_point_value)
 	
@@ -93,9 +94,11 @@ func _on_PlayerTile_area_entered(area):
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color
+	VisualServer.set_default_clear_color(sprite.modulate)
 	move_point_value = choosen_tile.move_point_value
 	move_point_lbl.text = str(choosen_tile.move_point_value)
 
 func _on_change_color_timer_timeout():
 	var pick_color = colors[randi() % colors.size()]
 	sprite.modulate = pick_color
+	VisualServer.set_default_clear_color(sprite.modulate)

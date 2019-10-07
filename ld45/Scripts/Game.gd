@@ -44,6 +44,9 @@ func _ready():
 	
 	#reset stocked points after every new start
 	Global.stocked_points = 0
+	
+	#set default background color
+	VisualServer.set_default_clear_color(Color(0.3, 0.3, 0.3))
 
 func initGrid():
 	# Initialize the grid to all default tiles

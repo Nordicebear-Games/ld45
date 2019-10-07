@@ -18,3 +18,5 @@ onready var bomb_sound = $bomb_sound
 onready var life_sound = $life_sound
 #warning-ignore:unused_class_variable
 onready var stock_point_sound = $stock_point_sound
+#warning-ignore:unused_class_variable
+onready var stock_point_used_sound = $stock_point_used_sound

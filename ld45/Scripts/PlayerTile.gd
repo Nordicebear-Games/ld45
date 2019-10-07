@@ -21,6 +21,7 @@ func _physics_process(delta):
 func move():
 	#use stocked points
 	if Input.is_action_just_pressed("use_stocked_points"):
+		SFX.stock_point_used_sound.play()
 		move_point_value += Global.stocked_points
 		move_point_lbl.text = str(move_point_value)
 		Global.stocked_points = 0

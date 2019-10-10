@@ -23,6 +23,7 @@ export (Array, PackedScene) var special_tiles
 onready var hud = $HUD
 onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
+onready var gamespeed_timer = $GameSpeedTimer
 
 var level_grid
 var ins_aim
@@ -171,5 +172,5 @@ func from_point_to_bomb(point_tile, posX, posY): #change point tile as bomb tile
 func _on_GameSpeedTimer_timeout():
 	if Engine.time_scale < 3:
 		Engine.time_scale += 0.05
+		gamespeed_timer.wait_time += 1
 		Global.current_game_speed = Engine.time_scale
-		print(Engine.time_scale)

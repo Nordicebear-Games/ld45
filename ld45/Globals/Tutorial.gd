@@ -19,7 +19,7 @@ var tut_dialog = [
 	"You grabbed a 'life tile' and this gave you an 'extra' life.",
 	"You grabbed same colored point tile. Your 'move count' increased!",
 	"You grabbed different colored point tile. Your 'move count' reduced!",
-	"Color changed. Tip: Color changes every '30' seconds.",
+	"Color changed.",
 	"Bomb exploded. Tip: Stay away from bombs."]
 var page = 0
 

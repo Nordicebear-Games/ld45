@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/SpecialTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/bomb_tile.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "anim"
 loop = true
 tracks/0/type = "value"
@@ -33,7 +33,7 @@ texture = ExtResource( 2 )
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/anim = SubResource( 3 )
+anims/anim = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

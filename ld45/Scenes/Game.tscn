@@ -29,4 +29,9 @@ special_tiles = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
 wait_time = 2.0
 autostart = true
 
+[node name="GameSpeedTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [connection signal="timeout" from="SpawnTileTimer" to="." method="_on_SpawnTileTimer_timeout"]
+[connection signal="timeout" from="GameSpeedTimer" to="." method="_on_GameSpeedTimer_timeout"]

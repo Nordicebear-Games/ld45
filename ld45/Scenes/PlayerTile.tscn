@@ -85,7 +85,7 @@ align = 1
 valign = 1
 
 [node name="change_color_timer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 90.0
 autostart = true
 
 [node name="notifier_sprite" type="Sprite" parent="."]

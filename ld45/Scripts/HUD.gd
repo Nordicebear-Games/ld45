@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 onready var score_lbl = $Game_HUD/score_lbl
+onready var speed_lbl = $Game_HUD/gamespeed_lbl
 onready var life_lbl = $Game_HUD/life_sprite/life_lbl
 onready var stock_point_lbl = $Game_HUD/stock_point_sprite/stock_point_lbl
 onready var gameover_hud = $GameOver_HUD
@@ -16,6 +17,7 @@ func _ready():
 #warning-ignore:unused_argument
 func _process(delta):
 	score_lbl.text = "Score: " + str(Global.score)
+	speed_lbl.text = "Speed: " + str(Global.current_game_speed)
 	life_lbl.text = str(Global.life)
 	stock_point_lbl.text = str(Global.stocked_points)
 

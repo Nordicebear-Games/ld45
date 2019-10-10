@@ -9,6 +9,10 @@ var life = 0
 var stocked_points = 0
 #warning-ignore:unused_class_variable
 var show_tutorial = true
+#warning-ignore:unused_class_variable
+var default_game_speed = 1
+#warning-ignore:unused_class_variable
+var current_game_speed = 1
 
 #SCENE MANAGER
 const SCENE_PATH = "res://Scenes/"

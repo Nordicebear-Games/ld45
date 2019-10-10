@@ -30,6 +30,11 @@ var ins_tile
 var ins_player_tile
 
 func _ready():
+	# assign default game speed after every new start
+	Engine.time_scale = Global.default_game_speed
+	Global.current_game_speed = Global.default_game_speed
+
+	# initialize grid
 	initGrid()
 
 	# This function will do more when there are more tile types
@@ -100,7 +105,7 @@ func init_aim_tile(posX, posY):
 func _on_SpawnTileTimer_timeout():
 	randomize()
 	var rand_spawn_rate = randi()%max_tile_in_a_row
-	print(rand_spawn_rate)
+#	print(rand_spawn_rate)
 	for i in rand_spawn_rate:
 		chooseTileAndInit()
 
@@ -162,3 +167,9 @@ func from_point_to_bomb(point_tile, posX, posY): #change point tile as bomb tile
 	initTile(ins_bomb_tile, posX, posY)
 	#destroy old point tile
 	point_tile.destroy()
+
+func _on_GameSpeedTimer_timeout():
+	if Engine.time_scale < 3:
+		Engine.time_scale += 0.05
+		Global.current_game_speed = Engine.time_scale
+		print(Engine.time_scale)

@@ -19,13 +19,13 @@ config/name="LD45"
 run/main_scene="res://Scenes/MainMenu.tscn"
 boot_splash/image="res://nordicebeargames transparent.png"
 boot_splash/fullsize=false
-config/icon="res://icon.png"
+config/icon="res://tilox_icon.png"
 
 [autoload]
 
 Global="*res://Globals/Global.gd"
 SFX="*res://Globals/SFX.tscn"
-Tutorial="*res://Tutorial/Tutorial.tscn"
+Tutorial="*res://Globals/Tutorial.tscn"
 
 [display]
 

@@ -110,6 +110,7 @@ align = 1
 valign = 1
 
 [node name="life_sprite" type="Sprite" parent="Game_HUD"]
+editor/display_folded = true
 position = Vector2( 317, 70 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 3 )
@@ -126,6 +127,7 @@ align = 1
 valign = 1
 
 [node name="stock_point_sprite" type="Sprite" parent="Game_HUD"]
+editor/display_folded = true
 position = Vector2( 317, 145 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 4 )
@@ -143,12 +145,11 @@ valign = 1
 
 [node name="GameOver_HUD" type="Node2D" parent="."]
 pause_mode = 2
-editor/display_folded = true
 visible = false
 
 [node name="gameover_panel" type="Panel" parent="GameOver_HUD"]
 modulate = Color( 1, 1, 1, 0.392157 )
-margin_right = 256.0
+margin_right = 263.0
 margin_bottom = 320.0
 
 [node name="gameover_lbl" type="Label" parent="GameOver_HUD"]

@@ -7,6 +7,8 @@ var score = 0
 var life = 0
 #warning-ignore:unused_class_variable
 var stocked_points = 0
+#warning-ignore:unused_class_variable
+var show_tutorial = true
 
 #SCENE MANAGER
 const SCENE_PATH = "res://Scenes/"
@@ -57,3 +59,31 @@ func load_highscore():
 func reset_highscore():
 	var dir = Directory.new()
 	dir.remove(SAVE_HS_FILE_PATH)
+
+#TUTORIAL
+const SAVE_TUT_FILE_PATH = "user://tutorial.save"
+
+func save_tut(con):
+	var save_file = File.new()
+	save_file.open(SAVE_TUT_FILE_PATH, File.WRITE)
+	var tut_data = {
+		tutorial = con
+	}
+	save_file.store_line(to_json(tut_data))
+	save_file.close()
+
+func load_tut():
+	var save_file = File.new()
+	if !save_file.file_exists(SAVE_TUT_FILE_PATH):
+		return show_tutorial
+	
+	#warning-ignore:unused_variable
+	var tutorial
+	
+	save_file.open(SAVE_TUT_FILE_PATH, File.READ)
+	var tut_data  = parse_json(save_file.get_line())
+	return tut_data["tutorial"]
+
+func reset_tut():
+	var dir = Directory.new()
+	dir.remove(SAVE_TUT_FILE_PATH)

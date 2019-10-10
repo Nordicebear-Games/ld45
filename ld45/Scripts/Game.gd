@@ -50,6 +50,8 @@ func _ready():
 	
 	#show tutorial (1)
 	Tutorial.tutorial_part("start")
+	if Global.load_tut():
+		Tutorial.tutorial_part("tutorial_1")
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -147,7 +149,10 @@ func from_aim_to_player(choosen_tile, posX, posY):
 	choosen_tile.destroy()
 	
 	#show tutorial (2)
-	Tutorial.tutorial_part("aim_to_player")
+	if Global.load_tut():
+		Tutorial.tutorial_part("tutorial_2")
+	else:
+		Tutorial.tutorial_part("aim_to_player")
 
 func from_point_to_bomb(point_tile, posX, posY): #change point tile as bomb tile when move point is 0
 	#instance bomb tile

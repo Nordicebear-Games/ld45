@@ -173,4 +173,4 @@ func _on_GameSpeedTimer_timeout():
 	if Engine.time_scale < 3:
 		Engine.time_scale += 0.05
 		gamespeed_timer.wait_time += 1
-		Global.current_game_speed = Engine.time_scale
+		Global.current_game_speed = stepify(Engine.time_scale, 0.01)

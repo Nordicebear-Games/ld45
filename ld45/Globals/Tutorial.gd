@@ -14,7 +14,7 @@ var tut_dialog = [
 	"After every move, 'move count'll reduce.",
 	"if 'move count' is '0' you can't move.",
 	"Now try to grab other tiles and see what happens.",
-	"You grabbed 'piggy bank tile', press 'S' to use it. Tip: Use it wisely.",
+	"You grabbed 'piggy bank tile', press 'P' to use it. Tip: Use it wisely.",
 	"Piggy bank used and 'move count' increased now.",
 	"You grabbed a 'life tile' and this gave you an 'extra' life.",
 	"You grabbed same colored point tile. Your 'move count' increased!",

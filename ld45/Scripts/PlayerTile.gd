@@ -19,14 +19,14 @@ func _physics_process(delta):
 	move()
 
 func move():
-	#use stocked points
-	if Input.is_action_just_pressed("use_stocked_points"):
+	#use piggy bank
+	if Input.is_action_just_pressed("use_stocked_points") && Global.stocked_points > 0:
 		SFX.stock_point_used_sound.play()
 		move_point_value += Global.stocked_points
 		move_point_lbl.text = str(move_point_value)
 		Global.stocked_points = 0
 
-		#show tutorial (4)
+		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_used")
 
 	# Calculate the direction the player is trying to go

@@ -1,19 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Textures/UI_Textures/tilox.png" type="Texture" id=2]
-[ext_resource path="res://Textures/UI_Textures/play_btn.png" type="Texture" id=3]
-[ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Textures/UI_Textures/background.png" type="Texture" id=2]
+[ext_resource path="res://Textures/UI_Textures/tilox.png" type="Texture" id=3]
+[ext_resource path="res://Textures/UI_Textures/play_btn.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
+font_data = ExtResource( 5 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "anim"
@@ -47,10 +48,16 @@ tracks/1/keys = {
 script = ExtResource( 1 )
 colors = [ Color( 0.784314, 0.254902, 0.254902, 1 ), Color( 0.137255, 0.666667, 0.843137, 1 ), Color( 0.215686, 0.843137, 0.294118, 1 ), Color( 0.960784, 0.431373, 0, 1 ), Color( 0.745098, 0.745098, 0.333333, 1 ), Color( 0.568627, 0.137255, 0.431373, 1 ) ]
 
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 128, 160 )
+scale = Vector2( 0.771084, 0.761905 )
+texture = ExtResource( 2 )
+
 [node name="tilox" type="Sprite" parent="."]
 position = Vector2( 128, 96 )
 scale = Vector2( 1.5, 1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Start_btn" type="Button" parent="."]
 margin_left = 104.0

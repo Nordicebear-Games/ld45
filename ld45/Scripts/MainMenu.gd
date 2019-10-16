@@ -2,6 +2,7 @@ extends CanvasLayer
 
 export (Array, Color) var colors
 
+onready var background = $Background
 onready var anim = $AnimationPlayer
 
 func _ready():
@@ -16,6 +17,7 @@ func change_background_color():
 	var pick_color = colors[randi() % colors.size()]
 	#set background color
 	VisualServer.set_default_clear_color(pick_color)
+	background.modulate = pick_color;
 
 func _on_Start_btn_pressed():
 	SFX.button_sound.play()

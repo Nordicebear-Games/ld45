@@ -63,17 +63,25 @@ func move():
 		grid_x = target[0]
 		grid_y = target[1]
 		#reduce move point after every move
-		move_point_value -= 1
+		_update_move_point("reduce", 1)
 		if move_point_value <= 0:
-			move_point_value = 0
+			_update_move_point("assign", 0)
 			_check_out_piggy_bank()
-		move_point_lbl.text = str(move_point_value)
 #		increase score after every move
 		Global.score += 1
 		SFX.player_move_sound.play()
 
 	# Set direction back to nothing
 	dir = Vector2(0, 0)
+
+func _update_move_point(con, value):
+	if con == "increase":
+		move_point_value += value
+	elif con == "reduce":
+		move_point_value -= value
+	elif con == "assign":
+		move_point_value = value
+	move_point_lbl.text = str(move_point_value)
 
 func _check_out_piggy_bank():
 	if Global.stocked_points > 0:
@@ -82,36 +90,29 @@ func _check_out_piggy_bank():
 		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_notifier")
 
-#func _update_move_point(value):
-#	move_point_value += value
-#	move_point_lbl.text = str(move_point_value)
-
 func _on_PlayerTile_area_entered(area):
 	if area.is_in_group("point_tile"):
 		#color control
 		if sprite.modulate == area.choosen_color:
 			SFX.gain_point_sound.play()
-			move_point_value += area.move_point_value
+			_update_move_point("increase", area.move_point_value)
 			#increase score after every succesfull point tile grab
 			Global.score += area.move_point_value
 			#off piggy bank notifier if it's on (no more need)
 			emit_signal("piggy_bank_notifier", "off")
-			
 			#show tutorial
 			Tutorial.tutorial_part("same_colored_point_tile")
 		else:
 			SFX.lose_point_sound.play()
-			move_point_value -= area.move_point_value
+			_update_move_point("reduce", area.move_point_value)
 			if move_point_value < 0:
-				move_point_value = 0
-			
+				_update_move_point("assign", 0)
 			#show tutorial
 			Tutorial.tutorial_part("wrong_colored_point_tile")
+
 		#change color
 		sprite.modulate = area.choosen_color
 		VisualServer.set_default_clear_color(sprite.modulate)
-		# assign move point value
-		move_point_lbl.text = str(move_point_value)
 	
 	if area.is_in_group("life_tile"):
 		SFX.life_sound.play()
@@ -146,8 +147,7 @@ func _on_PlayerTile_area_entered(area):
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color
 	VisualServer.set_default_clear_color(sprite.modulate)
-	move_point_value = choosen_tile.move_point_value
-	move_point_lbl.text = str(choosen_tile.move_point_value)
+	_update_move_point("assign", choosen_tile.move_point_value)
 
 func _on_change_color_timer_timeout():
 	var pick_color = colors[randi() % colors.size()]

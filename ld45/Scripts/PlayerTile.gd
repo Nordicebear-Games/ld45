@@ -28,7 +28,6 @@ func _user_input():
 		move_point_lbl.text = str(move_point_value)
 		Global.stocked_points = 0
 		emit_signal("piggy_bank_notifier", "off")
-
 		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_used")
 
@@ -36,7 +35,12 @@ func _user_input():
 	if Input.is_action_just_pressed("speed_up"):
 		Engine.time_scale += 0.1
 		Global.current_game_speed = stepify(Engine.time_scale, 0.01)
-		Global.score += 5
+		#extra score and move point for courage
+		var extra_rand_point = randi()%5+1
+		print(extra_rand_point)
+		Global.score += extra_rand_point
+		move_point_value += extra_rand_point
+		move_point_lbl.text = str(move_point_value)
 
 	# Calculate the direction the player is trying to go
 	dir = Vector2(0, 0)
@@ -77,6 +81,10 @@ func _check_out_piggy_bank():
 		emit_signal("piggy_bank_notifier", "on")
 		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_notifier")
+
+#func _update_move_point(value):
+#	move_point_value += value
+#	move_point_lbl.text = str(move_point_value)
 
 func _on_PlayerTile_area_entered(area):
 	if area.is_in_group("point_tile"):

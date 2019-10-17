@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Globals/SFX.gd" type="Script" id=1]
 [ext_resource path="res://SFXs/game_start_sound.wav" type="AudioStream" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://SFXs/life.wav" type="AudioStream" id=9]
 [ext_resource path="res://SFXs/stock_point.wav" type="AudioStream" id=10]
 [ext_resource path="res://SFXs/stock_point_used.wav" type="AudioStream" id=11]
+[ext_resource path="res://SFXs/turtle.wav" type="AudioStream" id=12]
 
 [node name="SFX" type="Control"]
 pause_mode = 2
@@ -47,4 +48,7 @@ stream = ExtResource( 10 )
 
 [node name="stock_point_used_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 11 )
+
+[node name="turtle_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
 

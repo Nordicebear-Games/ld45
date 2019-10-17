@@ -36,7 +36,7 @@ func _user_input():
 		Engine.time_scale += 0.1
 		Global.current_game_speed = stepify(Engine.time_scale, 0.01)
 		#extra score and move point for courage
-		var extra_rand_point = randi()%5+1
+		var extra_rand_point = randi()%10+1
 		print(extra_rand_point)
 		Global.score += extra_rand_point
 		move_point_value += extra_rand_point
@@ -147,6 +147,7 @@ func _on_PlayerTile_area_entered(area):
 
 	if area.is_in_group("turtle_tile"):
 		if Engine.time_scale >= 1.1:
+			SFX.turtle_sound.play()
 			Engine.time_scale -= 0.1
 			Global.current_game_speed = stepify(Engine.time_scale, 0.01)
 			area.destroy()

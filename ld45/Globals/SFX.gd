@@ -20,3 +20,5 @@ onready var life_sound = $life_sound
 onready var stock_point_sound = $stock_point_sound
 #warning-ignore:unused_class_variable
 onready var stock_point_used_sound = $stock_point_used_sound
+#warning-ignore:unused_class_variable
+onready var turtle_sound = $turtle_sound

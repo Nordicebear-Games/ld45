@@ -32,40 +32,37 @@ var ins_tile
 var ins_player_tile
 
 func _ready():
-#	Global.reset_highscore()
-#	Global.reset_tut()
-
+	#signals
+	_signal_connect("hud")
 	#animations
-	game_anim.play("game_diffusion")
-	Tutorial.tut_anim.play("tut_diffusion")
+	anim_control("start")
+	#game
+	_prepare_game()
+	_default_game_values()
 
-	# assign default game speed after every new start
-	Engine.time_scale = Global.default_game_speed
-	Global.current_game_speed = Global.default_game_speed
-
+func _prepare_game():
 	# initialize grid
 	initGrid()
-
 	# This function will do more when there are more tile types
 	draw_level()
-	
 	#initialize aim
 	randomize()
 	init_aim_tile(randi()%grid_width, grid_height / 2)
-	
-	#reset score after every new start
-	Global.score = 0
-	
-	#reset stocked points after every new start
-	Global.stocked_points = 0
-	
-	#set default background color
-	VisualServer.set_default_clear_color(Color(0.3, 0.3, 0.3))
-	
-	#show tutorial (1)
+	#show tutorial
 	Tutorial.tutorial_part("start")
 	if Global.load_tut():
 		Tutorial.tutorial_part("tutorial_1")
+
+func _default_game_values():
+	# assign default game speed after every new start
+	Engine.time_scale = Global.default_game_speed
+	Global.current_game_speed = Global.default_game_speed
+	#reset score after every new start
+	Global.score = 0
+	#reset stocked points after every new start
+	Global.stocked_points = 0
+	#set default background color
+	VisualServer.set_default_clear_color(Color(0.3, 0.3, 0.3))
 
 func initGrid():
 	# Initialize the grid to all default tiles
@@ -90,14 +87,16 @@ func draw_level():
 				var pos = grid_to_pixel(i, j)
 				tile.position = Vector2(pos[0], pos[1])
 
-func _signal_connect(which_tile):
-	if which_tile == "player_tile":
+func _signal_connect(which_obj):
+	if which_obj == "player_tile":
 		ins_player_tile.connect("game_over", hud, "game_over")
 		ins_player_tile.connect("piggy_bank_notifier", hud, "piggy_bank_notifier")
-	if which_tile == "point_tile":
+	if which_obj == "point_tile":
 		ins_tile.connect("make_it_bomb_tile", self, "from_point_to_bomb")
-	if which_tile == "aim_tile":
+	if which_obj == "aim_tile":
 		ins_aim.connect("make_it_player_tile", self, "from_aim_to_player")
+	if which_obj == "hud":
+		hud.connect("restart_game", self, "anim_control")
 
 func init_aim_tile(posX, posY):
 	# Initialize the aim
@@ -182,3 +181,15 @@ func _on_GameSpeedTimer_timeout():
 	Engine.time_scale += 0.05
 	gamespeed_timer.wait_time += 1
 	Global.current_game_speed = stepify(Engine.time_scale, 0.01)
+
+func anim_control(state):
+	if state == "start":
+		game_anim.play("game_screen_collection")
+		Tutorial.tut_anim.play("tut_collection")
+	if state == "restart":
+		game_anim.play("game_screen_diffusion")
+		Tutorial.tut_anim.play("tut_diffusion")
+
+func _on_game_anim_animation_finished(anim_name):
+	if anim_name == "game_screen_diffusion":
+		Global.change_scene("Game")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/DefaultTile.tscn" type="PackedScene" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
-resource_name = "game_diffusion"
+resource_name = "game_screen_collection"
 tracks/0/type = "value"
 tracks/0/path = NodePath("HUD:offset")
 tracks/0/interp = 1
@@ -36,6 +36,45 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( -300, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "game_screen_diffusion"
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 100, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DefaultTileContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -300, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TileContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, -600 ) ]
 }
 
 [node name="Game" type="Node2D"]
@@ -66,7 +105,10 @@ wait_time = 30.0
 autostart = true
 
 [node name="game_anim" type="AnimationPlayer" parent="."]
-anims/game_diffusion = SubResource( 1 )
+pause_mode = 2
+anims/game_screen_collection = SubResource( 1 )
+anims/game_screen_diffusion = SubResource( 2 )
 
 [connection signal="timeout" from="SpawnTileTimer" to="." method="_on_SpawnTileTimer_timeout"]
 [connection signal="timeout" from="GameSpeedTimer" to="." method="_on_GameSpeedTimer_timeout"]
+[connection signal="animation_finished" from="game_anim" to="." method="_on_game_anim_animation_finished"]

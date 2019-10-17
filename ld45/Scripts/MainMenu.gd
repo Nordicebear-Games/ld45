@@ -24,4 +24,5 @@ func _on_Start_btn_pressed():
 	anim.play("menu_diffusion")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	Global.change_scene("Game")
+	if anim_name == "menu_diffusion":
+		Global.change_scene("Game")

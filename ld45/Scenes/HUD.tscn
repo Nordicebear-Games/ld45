@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=2]
@@ -42,6 +42,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
+resource_name = "life_and_piggy"
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("life_sprite:frame")
@@ -84,35 +85,8 @@ font_data = ExtResource( 2 )
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="Animation" id=8]
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("restart_btn:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 96, 192 ), Vector2( 104, 200 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("restart_btn:rect_scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.75 ) ]
-}
-
 [sub_resource type="Animation" id=10]
-resource_name = "game_over_diffusion"
+resource_name = "game_over_panel_collection"
 tracks/0/type = "value"
 tracks/0/path = NodePath("gameover_panel:rect_position")
 tracks/0/interp = 1
@@ -160,6 +134,85 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 96, 350 ), Vector2( 96, 192 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "game_over_panel_diffusion"
+tracks/0/type = "value"
+tracks/0/path = NodePath("gameover_panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -300, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("gameover_lbl:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 32, -132 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("highscore_lbl:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 128 ), Vector2( 32, -60 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("restart_btn:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 96, 192 ), Vector2( 96, 350 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "restart_button"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("restart_btn:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 96, 192 ), Vector2( 104, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("restart_btn:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.75 ) ]
 }
 
 [node name="HUD" type="CanvasLayer"]
@@ -222,16 +275,19 @@ align = 1
 valign = 1
 
 [node name="notifier_sprite" type="Sprite" parent="Game_HUD/stock_point_sprite"]
+editor/display_folded = true
 visible = false
 modulate = Color( 0.984314, 1, 0, 1 )
 texture = ExtResource( 5 )
 vframes = 2
+frame = 1
 
 [node name="notifier_anim" type="AnimationPlayer" parent="Game_HUD/stock_point_sprite/notifier_sprite"]
 anims/notifier = SubResource( 4 )
 
-[node name="game_anim" type="AnimationPlayer" parent="Game_HUD"]
-anims/anim = SubResource( 9 )
+[node name="game_panel_anim" type="AnimationPlayer" parent="Game_HUD"]
+pause_mode = 2
+anims/life_and_piggy = SubResource( 9 )
 
 [node name="GameOver_HUD" type="Node2D" parent="."]
 pause_mode = 2
@@ -274,7 +330,10 @@ custom_styles/focus = SubResource( 7 )
 custom_styles/normal = SubResource( 7 )
 
 [node name="gameover_anim" type="AnimationPlayer" parent="GameOver_HUD"]
-anims/anim = SubResource( 8 )
-anims/game_over_diffusion = SubResource( 10 )
+pause_mode = 2
+anims/game_over_panel_collection = SubResource( 10 )
+anims/game_over_panel_diffusion = SubResource( 11 )
+anims/restart_button = SubResource( 8 )
 
 [connection signal="pressed" from="GameOver_HUD/restart_btn" to="." method="_on_restart_btn_pressed"]
+[connection signal="animation_finished" from="GameOver_HUD/gameover_anim" to="." method="_on_gameover_anim_animation_finished"]

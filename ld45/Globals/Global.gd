@@ -10,9 +10,14 @@ var stocked_points = 0
 #warning-ignore:unused_class_variable
 var show_tutorial = true
 #warning-ignore:unused_class_variable
-var default_game_speed = 1
+var default_game_speed = 1.5
 #warning-ignore:unused_class_variable
-var current_game_speed = 1
+var current_game_speed = 1.5
+
+func _ready():
+#	Global.reset_highscore()
+#	Global.reset_tut()
+	pass
 
 #SCENE MANAGER
 const SCENE_PATH = "res://Scenes/"

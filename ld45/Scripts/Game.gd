@@ -85,6 +85,7 @@ func draw_level():
 func _signal_connect(which_tile):
 	if which_tile == "player_tile":
 		ins_player_tile.connect("game_over", hud, "game_over")
+		ins_player_tile.connect("piggy_bank_notifier", hud, "piggy_bank_notifier")
 	if which_tile == "point_tile":
 		ins_tile.connect("make_it_bomb_tile", self, "from_point_to_bomb")
 	if which_tile == "aim_tile":

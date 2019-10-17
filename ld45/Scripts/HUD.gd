@@ -4,6 +4,8 @@ onready var score_lbl = $Game_HUD/score_lbl
 onready var speed_lbl = $Game_HUD/gamespeed_lbl
 onready var life_lbl = $Game_HUD/life_sprite/life_lbl
 onready var stock_point_lbl = $Game_HUD/stock_point_sprite/stock_point_lbl
+onready var piggy_bank_notifier_sprite = $Game_HUD/stock_point_sprite/notifier_sprite
+onready var piggy_bank_notifier_anim = $Game_HUD/stock_point_sprite/notifier_sprite/notifier_anim
 onready var gameover_hud = $GameOver_HUD
 onready var highscore_lbl = $GameOver_HUD/highscore_lbl
 onready var hud_anim = $hud_anim
@@ -25,6 +27,14 @@ func assing_highscore(value):
 		Global.save_highscore(value)
 		highscore = str(Global.load_highscore()) # update high score
 		highscore_lbl.text = "Highscore: " + highscore # assign high score to text
+
+func piggy_bank_notifier(con):
+	if con == "on":
+		piggy_bank_notifier_sprite.visible = true
+		piggy_bank_notifier_anim.play("notifier")
+	elif con == "off":
+		piggy_bank_notifier_sprite.visible = false
+		piggy_bank_notifier_anim.stop()
 
 func game_over():
 	SFX.game_over_sound.play()

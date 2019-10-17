@@ -38,4 +38,5 @@ func _on_point_timer_timeout():
 
 #warning-ignore:unused_argument
 func _on_PointTile_area_entered(area):
+	print(area.name)
 	self.destroy()

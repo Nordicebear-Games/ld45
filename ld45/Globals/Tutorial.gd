@@ -20,7 +20,8 @@ var tut_dialog = [
 	"You grabbed same colored point tile. Your 'move count' increased!",
 	"You grabbed different colored point tile. Your 'move count' reduced!",
 	"Color changed.",
-	"Bomb exploded. Tip: Stay away from bombs."]
+	"Bomb exploded. Tip: Stay away from bombs.",
+	"You can use piggy bank."]
 var page = 0
 
 # Functions
@@ -107,6 +108,9 @@ func tutorial_part(part):
 	
 	if part == "bomb_exploded":
 		show_dialog_page(tut_dialog, 14)
+
+	if part == "piggy_bank_notifier":
+		show_dialog_page(tut_dialog, 15)
 
 
 

@@ -1,6 +1,7 @@
 extends "res://Scripts/Tile.gd"
 
 signal game_over
+signal piggy_bank_notifier(condition)
 
 export (Array, Color) var colors
 
@@ -8,6 +9,7 @@ onready var sprite = $Sprite
 onready var move_point_lbl = $move_point_lbl
 onready var notifier_anim = $notifier_sprite/AnimationPlayer
 
+var dir = Vector2(0, 0)
 var move_point_value = 0
 
 func _ready():
@@ -18,19 +20,20 @@ func _ready():
 func _physics_process(delta):
 	move()
 
-func move():
-	#use piggy bank
+func _user_input():
+		#use piggy bank
 	if Input.is_action_just_pressed("use_stocked_points") && Global.stocked_points > 0:
 		SFX.stock_point_used_sound.play()
 		move_point_value += Global.stocked_points
 		move_point_lbl.text = str(move_point_value)
 		Global.stocked_points = 0
+		emit_signal("piggy_bank_notifier", "off")
 
 		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_used")
 
 	# Calculate the direction the player is trying to go
-	var dir = Vector2(0, 0)
+	dir = Vector2(0, 0)
 	if (Input.is_action_just_pressed("ui_up") && grid_y > 0):
 		dir = Vector2(0, -1)
 	elif (Input.is_action_just_pressed("ui_down") && grid_y < grid_height - 1):
@@ -40,6 +43,9 @@ func move():
 	elif (Input.is_action_just_pressed("ui_left") && grid_x > 0):
 		dir = Vector2(-1, 0)
 
+func move():
+	_user_input()
+
 	# Move the player to the new position
 	if (dir != Vector2(0, 0) && move_point_value != 0):
 		var target = Vector2(grid_x + dir[0], grid_y + dir[1])
@@ -48,8 +54,9 @@ func move():
 		grid_y = target[1]
 		#reduce move point after every move
 		move_point_value -= 1
-		if move_point_value < 0:
+		if move_point_value <= 0:
 			move_point_value = 0
+			_check_out_piggy_bank()
 		move_point_lbl.text = str(move_point_value)
 #		increase score after every move
 		Global.score += 1
@@ -58,14 +65,23 @@ func move():
 	# Set direction back to nothing
 	dir = Vector2(0, 0)
 
+func _check_out_piggy_bank():
+	if Global.stocked_points > 0:
+		# piggy bank notifier (on)
+		emit_signal("piggy_bank_notifier", "on")
+		#show tutorial
+		Tutorial.tutorial_part("piggy_bank_notifier")
+
 func _on_PlayerTile_area_entered(area):
 	if area.is_in_group("point_tile"):
 		#color control
 		if sprite.modulate == area.choosen_color:
 			SFX.gain_point_sound.play()
 			move_point_value += area.move_point_value
-	#		increase score after every succesfull point tile grab
+			#increase score after every succesfull point tile grab
 			Global.score += area.move_point_value
+			#off piggy bank notifier if it's on (no more need)
+			emit_signal("piggy_bank_notifier", "off")
 			
 			#show tutorial
 			Tutorial.tutorial_part("same_colored_point_tile")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Textures/life_tile.png" type="Texture" id=3]
 [ext_resource path="res://Textures/stock_point_tile.png" type="Texture" id=4]
-[ext_resource path="res://Textures/UI_Textures/restart_btn.png" type="Texture" id=5]
+[ext_resource path="res://Textures/player_notifier.png" type="Texture" id=5]
+[ext_resource path="res://Textures/UI_Textures/restart_btn.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -24,24 +25,39 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="Animation" id=4]
+resource_name = "notifier"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="DynamicFont" id=5]
 size = 50
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 30
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=6]
-texture = ExtResource( 5 )
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="Animation" id=7]
-resource_name = "anim"
+[sub_resource type="Animation" id=8]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("restart_btn:rect_position")
@@ -68,7 +84,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.75 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Game_HUD/life_sprite:frame")
@@ -137,7 +153,6 @@ align = 1
 valign = 1
 
 [node name="stock_point_sprite" type="Sprite" parent="Game_HUD"]
-editor/display_folded = true
 position = Vector2( 317, 180 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 4 )
@@ -152,6 +167,15 @@ custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
+
+[node name="notifier_sprite" type="Sprite" parent="Game_HUD/stock_point_sprite"]
+visible = false
+modulate = Color( 0.984314, 1, 0, 1 )
+texture = ExtResource( 5 )
+vframes = 2
+
+[node name="notifier_anim" type="AnimationPlayer" parent="Game_HUD/stock_point_sprite/notifier_sprite"]
+anims/notifier = SubResource( 4 )
 
 [node name="GameOver_HUD" type="Node2D" parent="."]
 pause_mode = 2
@@ -168,7 +192,7 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = 224.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Game Over"
 align = 1
 valign = 1
@@ -178,7 +202,7 @@ margin_left = 32.0
 margin_top = 128.0
 margin_right = 224.0
 margin_bottom = 159.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "High Score: 0"
 align = 1
 valign = 1
@@ -188,15 +212,15 @@ margin_left = 96.0
 margin_top = 192.0
 margin_right = 160.0
 margin_bottom = 254.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 
 [node name="gameover_anim" type="AnimationPlayer" parent="GameOver_HUD"]
-anims/anim = SubResource( 7 )
+anims/anim = SubResource( 8 )
 
 [node name="hud_anim" type="AnimationPlayer" parent="."]
-anims/anim = SubResource( 8 )
+anims/anim = SubResource( 9 )
 
 [connection signal="pressed" from="GameOver_HUD/restart_btn" to="." method="_on_restart_btn_pressed"]

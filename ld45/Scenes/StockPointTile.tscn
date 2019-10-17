@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/SpecialTile.gd" type="Script" id=1]
 [ext_resource path="res://Textures/stock_point_tile.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "anim"
 loop = true
 tracks/0/type = "value"
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 13.9582, 14.1876 )
 
 [node name="StockPointTile" type="Area2D" groups=[
@@ -33,10 +33,10 @@ texture = ExtResource( 2 )
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/anim = SubResource( 2 )
+anims/anim = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="move_timer" type="Timer" parent="."]
 wait_time = 2.0

@@ -22,3 +22,5 @@ onready var stock_point_sound = $stock_point_sound
 onready var stock_point_used_sound = $stock_point_used_sound
 #warning-ignore:unused_class_variable
 onready var turtle_sound = $turtle_sound
+#warning-ignore:unused_class_variable
+onready var speed_up_used = $speed_up_used

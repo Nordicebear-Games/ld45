@@ -8,8 +8,8 @@
 [ext_resource path="res://Textures/UI_Textures/restart_btn.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 25
-outline_size = 2
+size = 28
+outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 

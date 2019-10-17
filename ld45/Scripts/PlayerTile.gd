@@ -147,9 +147,9 @@ func _on_PlayerTile_area_entered(area):
 		Tutorial.tutorial_part("piggy_bank_grabbed")
 
 	if area.is_in_group("turtle_tile"):
-		if Engine.time_scale >= 1.05:
+		if Engine.time_scale >= 1.1:
 			SFX.turtle_sound.play()
-			Engine.time_scale -= 0.05
+			Engine.time_scale -= 0.1
 			Global.current_game_speed = stepify(Engine.time_scale, 0.01)
 			area.destroy()
 			#show tutorial

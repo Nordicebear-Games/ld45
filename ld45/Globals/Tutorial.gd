@@ -24,7 +24,7 @@ var tut_dialog = [
 	"Color changed.",
 	"Bomb exploded. Tip: Stay away from bombs.",
 	"You can use piggy bank. Press 'P' to use.",
-	"Extra score and move point gained but game speed increased too.",
+	"Speed up used.",
 	"You can use speed up. Press 'S' to use.",
 	"Game speed reduced.",
 	"Game speed is already slow."]

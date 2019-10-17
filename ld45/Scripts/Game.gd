@@ -24,6 +24,7 @@ onready var hud = $HUD
 onready var def_tile_con = $DefaultTileContainer
 onready var tile_con = $TileContainer
 onready var gamespeed_timer = $GameSpeedTimer
+onready var game_anim = $game_anim
 
 var level_grid
 var ins_aim
@@ -33,7 +34,11 @@ var ins_player_tile
 func _ready():
 #	Global.reset_highscore()
 #	Global.reset_tut()
-	
+
+	#animations
+	game_anim.play("game_diffusion")
+	Tutorial.tut_anim.play("tut_diffusion")
+
 	# assign default game speed after every new start
 	Engine.time_scale = Global.default_game_speed
 	Global.current_game_speed = Global.default_game_speed

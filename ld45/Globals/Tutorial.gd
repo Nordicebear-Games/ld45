@@ -3,6 +3,7 @@ extends CanvasLayer
 onready var tutorial_box = $TutorialBox
 onready var dialog_box = $TutorialBox/DialogBox
 onready var paused_box = $PausedBox
+onready var tut_anim = $tut_anim
 
 # Variables
 var tut_dialog = [

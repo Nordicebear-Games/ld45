@@ -8,13 +8,13 @@ onready var piggy_bank_notifier_sprite = $Game_HUD/stock_point_sprite/notifier_s
 onready var piggy_bank_notifier_anim = $Game_HUD/stock_point_sprite/notifier_sprite/notifier_anim
 onready var gameover_hud = $GameOver_HUD
 onready var highscore_lbl = $GameOver_HUD/highscore_lbl
-onready var hud_anim = $hud_anim
+onready var game_anim = $Game_HUD/game_anim
 onready var gameover_anim = $GameOver_HUD/gameover_anim
 
 var highscore = 0
 
 func _ready():
-	hud_anim.play("anim")
+	game_anim.play("anim")
 
 #warning-ignore:unused_argument
 func _process(delta):
@@ -41,10 +41,12 @@ func game_over():
 	gameover_hud.visible = true
 	assing_highscore(Global.score)
 	gameover_anim.play("anim")
+	gameover_anim.play("game_over_diffusion")
 	get_tree().paused = true #pause game
 
 func _on_restart_btn_pressed():
 	SFX.button_sound.play()
-	gameover_hud.visible = false
-	gameover_anim.stop()
+	gameover_anim.play_backwards("game_over_diffusion")
+#	gameover_hud.visible = false
+#	gameover_anim.stop()
 	Global.change_scene("Game")

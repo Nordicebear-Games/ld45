@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/DefaultTile.tscn" type="PackedScene" id=2]
@@ -11,6 +11,33 @@
 [ext_resource path="res://Scenes/TurtleTile.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=10]
 
+[sub_resource type="Animation" id=1]
+resource_name = "game_diffusion"
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 100, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DefaultTileContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -300, 0 ), Vector2( 0, 0 ) ]
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 default_tile = ExtResource( 2 )
@@ -21,10 +48,14 @@ bomb_tile = ExtResource( 6 )
 special_tiles = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ) ]
 
 [node name="HUD" parent="." instance=ExtResource( 10 )]
+offset = Vector2( 100, 0 )
+transform = Transform2D( 1, 0, 0, 1, 100, 0 )
 
 [node name="DefaultTileContainer" type="Node2D" parent="."]
+position = Vector2( -300, 0 )
 
 [node name="TileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -32 )
 
 [node name="SpawnTileTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -33,6 +64,9 @@ autostart = true
 [node name="GameSpeedTimer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
+
+[node name="game_anim" type="AnimationPlayer" parent="."]
+anims/game_diffusion = SubResource( 1 )
 
 [connection signal="timeout" from="SpawnTileTimer" to="." method="_on_SpawnTileTimer_timeout"]
 [connection signal="timeout" from="GameSpeedTimer" to="." method="_on_GameSpeedTimer_timeout"]

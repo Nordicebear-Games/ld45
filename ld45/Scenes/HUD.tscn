@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=2]
@@ -35,6 +35,33 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=9]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("life_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("stock_point_sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -84,31 +111,55 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.75 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-loop = true
+[sub_resource type="Animation" id=10]
+resource_name = "game_over_diffusion"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Game_HUD/life_sprite:frame")
+tracks/0/path = NodePath("gameover_panel:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 1 ),
+"times": PoolRealArray( 0.2, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
+"update": 0,
+"values": [ Vector2( -300, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Game_HUD/stock_point_sprite:frame")
+tracks/1/path = NodePath("gameover_lbl:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5, 1 ),
+"times": PoolRealArray( 0.2, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
+"update": 0,
+"values": [ Vector2( 32, -132 ), Vector2( 32, 32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("highscore_lbl:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -60 ), Vector2( 32, 128 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("restart_btn:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 96, 350 ), Vector2( 96, 192 ) ]
 }
 
 [node name="HUD" type="CanvasLayer"]
@@ -141,6 +192,7 @@ position = Vector2( 317, 105 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 3 )
 vframes = 2
+frame = 1
 
 [node name="life_lbl" type="Label" parent="Game_HUD/life_sprite"]
 margin_left = -16.0
@@ -157,6 +209,7 @@ position = Vector2( 317, 180 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 4 )
 vframes = 2
+frame = 1
 
 [node name="stock_point_lbl" type="Label" parent="Game_HUD/stock_point_sprite"]
 margin_left = -16.0
@@ -177,21 +230,24 @@ vframes = 2
 [node name="notifier_anim" type="AnimationPlayer" parent="Game_HUD/stock_point_sprite/notifier_sprite"]
 anims/notifier = SubResource( 4 )
 
+[node name="game_anim" type="AnimationPlayer" parent="Game_HUD"]
+anims/anim = SubResource( 9 )
+
 [node name="GameOver_HUD" type="Node2D" parent="."]
 pause_mode = 2
-editor/display_folded = true
 visible = false
 
 [node name="gameover_panel" type="Panel" parent="GameOver_HUD"]
 modulate = Color( 1, 1, 1, 0.392157 )
-margin_right = 263.0
+margin_left = -300.0
+margin_right = -37.0
 margin_bottom = 320.0
 
 [node name="gameover_lbl" type="Label" parent="GameOver_HUD"]
 margin_left = 32.0
-margin_top = 32.0
+margin_top = -132.0
 margin_right = 224.0
-margin_bottom = 96.0
+margin_bottom = -68.0
 custom_fonts/font = SubResource( 5 )
 text = "Game Over"
 align = 1
@@ -199,9 +255,9 @@ valign = 1
 
 [node name="highscore_lbl" type="Label" parent="GameOver_HUD"]
 margin_left = 32.0
-margin_top = 128.0
+margin_top = -60.0
 margin_right = 224.0
-margin_bottom = 159.0
+margin_bottom = -29.0
 custom_fonts/font = SubResource( 6 )
 text = "High Score: 0"
 align = 1
@@ -209,9 +265,9 @@ valign = 1
 
 [node name="restart_btn" type="Button" parent="GameOver_HUD"]
 margin_left = 96.0
-margin_top = 192.0
+margin_top = 350.0
 margin_right = 160.0
-margin_bottom = 254.0
+margin_bottom = 412.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 7 )
@@ -219,8 +275,6 @@ custom_styles/normal = SubResource( 7 )
 
 [node name="gameover_anim" type="AnimationPlayer" parent="GameOver_HUD"]
 anims/anim = SubResource( 8 )
-
-[node name="hud_anim" type="AnimationPlayer" parent="."]
-anims/anim = SubResource( 9 )
+anims/game_over_diffusion = SubResource( 10 )
 
 [connection signal="pressed" from="GameOver_HUD/restart_btn" to="." method="_on_restart_btn_pressed"]

@@ -23,7 +23,9 @@ var tut_dialog = [
 	"Bomb exploded. Tip: Stay away from bombs.",
 	"You can use piggy bank. Press 'P' to use.",
 	"Extra score and move point gained but game speed increased too.",
-	"You can use speed up. Press 'S' to use."]
+	"You can use speed up. Press 'S' to use.",
+	"Game speed reduced.",
+	"Game speed is already slow."]
 var page = 0
 
 # Functions
@@ -120,6 +122,11 @@ func tutorial_part(part):
 	if part == "speed_up_notifier":
 		show_dialog_page(tut_dialog, 17)
 
+	if part == "game_speed_reduced":
+		show_dialog_page(tut_dialog, 18)
+
+	if part == "game_speed_already_slow":
+		show_dialog_page(tut_dialog, 19)
 
 
 

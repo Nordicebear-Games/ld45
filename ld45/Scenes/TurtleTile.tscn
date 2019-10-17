@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/SpecialTile.gd" type="Script" id=1]
-[ext_resource path="res://Textures/stock_point_tile.png" type="Texture" id=2]
+[ext_resource path="res://Textures/turtle_tile.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "anim"
@@ -22,9 +22,9 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 13.9582, 14.1876 )
 
-[node name="StockPointTile" type="Area2D" groups=[
+[node name="TurtleTile" type="Area2D" groups=[
 "special_tile",
-"stock_point_tile",
+"turtle_tile",
 ]]
 script = ExtResource( 1 )
 
@@ -45,6 +45,6 @@ autostart = true
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 scale = Vector2( 1.51894, 1.5543 )
 
-[connection signal="area_entered" from="." to="." method="_on_StockPointTile_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_TurtleTile_area_entered"]
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
 [connection signal="screen_exited" from="visibility" to="." method="_on_visibility_screen_exited"]

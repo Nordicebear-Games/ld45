@@ -111,9 +111,9 @@ func _on_PlayerTile_area_entered(area):
 			_update_move_point("reduce", area.move_point_value)
 			if move_point_value < 0:
 				_update_move_point("assign", 0)
+				_check_out_piggy_bank()
 			#show tutorial
 			Tutorial.tutorial_part("wrong_colored_point_tile")
-
 		#change color
 		sprite.modulate = area.choosen_color
 		VisualServer.set_default_clear_color(sprite.modulate)
@@ -122,8 +122,7 @@ func _on_PlayerTile_area_entered(area):
 		SFX.life_sound.play()
 		Global.life += 1
 		area.destroy()
-		
-		#show tutorial (5)
+		#show tutorial
 		Tutorial.tutorial_part("life_grabbed")
 
 	if area.is_in_group("bomb_tile"):
@@ -136,7 +135,6 @@ func _on_PlayerTile_area_entered(area):
 			area.destroy()
 			self.destroy()
 			emit_signal("game_over")
-		
 		#show tutorial
 		Tutorial.tutorial_part("bomb_exploded")
 	
@@ -144,9 +142,19 @@ func _on_PlayerTile_area_entered(area):
 		SFX.stock_point_sound.play()
 		Global.stocked_points += randi()%5 + 1
 		area.destroy()
-		
-		#show tutorial (3)
+		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_grabbed")
+
+	if area.is_in_group("turtle_tile"):
+		if Engine.time_scale >= 1.1:
+			Engine.time_scale -= 0.1
+			Global.current_game_speed = stepify(Engine.time_scale, 0.01)
+			area.destroy()
+			#show tutorial
+			Tutorial.tutorial_part("game_speed_reduced")
+		else:
+			#show tutorial
+			Tutorial.tutorial_part("game_speed_already_slow")
 
 func assign_features(choosen_tile):
 	sprite.modulate = choosen_tile.choosen_color

@@ -31,6 +31,9 @@ var ins_tile
 var ins_player_tile
 
 func _ready():
+#	Global.reset_highscore()
+#	Global.reset_tut()
+	
 	# assign default game speed after every new start
 	Engine.time_scale = Global.default_game_speed
 	Global.current_game_speed = Global.default_game_speed

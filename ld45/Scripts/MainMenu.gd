@@ -3,10 +3,10 @@ extends CanvasLayer
 export (Array, Color) var colors
 
 onready var background = $Background
-onready var anim = $AnimationPlayer
+onready var anim = $main_menu_anim
 
 func _ready():
-	anim.play("anim")
+	anim.play("menu collection")
 	change_background_color()
 
 func _on_color_change_timer_timeout():
@@ -23,6 +23,8 @@ func _on_Start_btn_pressed():
 	SFX.button_sound.play()
 	anim.play("menu_diffusion")
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_main_menu_anim_animation_finished(anim_name):
+	if anim_name == "menu collection":
+		anim.play("start_button")
 	if anim_name == "menu_diffusion":
 		Global.change_scene("Game")

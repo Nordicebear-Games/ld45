@@ -41,6 +41,8 @@ func _user_input():
 		Global.score += extra_rand_point
 		move_point_value += extra_rand_point
 		move_point_lbl.text = str(move_point_value)
+		#show tutorial
+		Tutorial.tutorial_part("speed_up_used")
 
 	# Calculate the direction the player is trying to go
 	dir = Vector2(0, 0)
@@ -89,6 +91,8 @@ func _check_out_piggy_bank():
 		emit_signal("piggy_bank_notifier", "on")
 		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_notifier")
+	else:
+		Tutorial.tutorial_part("speed_up_notifier")
 
 func _on_PlayerTile_area_entered(area):
 	if area.is_in_group("point_tile"):

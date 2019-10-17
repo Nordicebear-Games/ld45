@@ -21,7 +21,9 @@ var tut_dialog = [
 	"You grabbed different colored point tile. Your 'move count' reduced!",
 	"Color changed.",
 	"Bomb exploded. Tip: Stay away from bombs.",
-	"You can use piggy bank."]
+	"You can use piggy bank. Press 'P' to use.",
+	"Extra score and move point gained but game speed increased too.",
+	"You can use speed up. Press 'S' to use."]
 var page = 0
 
 # Functions
@@ -111,6 +113,12 @@ func tutorial_part(part):
 
 	if part == "piggy_bank_notifier":
 		show_dialog_page(tut_dialog, 15)
+
+	if part == "speed_up_used":
+		show_dialog_page(tut_dialog, 16)
+
+	if part == "speed_up_notifier":
+		show_dialog_page(tut_dialog, 17)
 
 
 

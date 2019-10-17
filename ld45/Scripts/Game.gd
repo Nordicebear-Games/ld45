@@ -171,7 +171,6 @@ func from_point_to_bomb(point_tile, posX, posY): #change point tile as bomb tile
 	point_tile.destroy()
 
 func _on_GameSpeedTimer_timeout():
-	if Engine.time_scale < 3:
-		Engine.time_scale += 0.05
-		gamespeed_timer.wait_time += 1
-		Global.current_game_speed = stepify(Engine.time_scale, 0.01)
+	Engine.time_scale += 0.05
+	gamespeed_timer.wait_time += 1
+	Global.current_game_speed = stepify(Engine.time_scale, 0.01)

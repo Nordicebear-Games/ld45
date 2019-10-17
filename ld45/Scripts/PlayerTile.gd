@@ -21,7 +21,7 @@ func _physics_process(delta):
 	move()
 
 func _user_input():
-		#use piggy bank
+	#use piggy bank
 	if Input.is_action_just_pressed("use_stocked_points") && Global.stocked_points > 0:
 		SFX.stock_point_used_sound.play()
 		move_point_value += Global.stocked_points
@@ -31,6 +31,12 @@ func _user_input():
 
 		#show tutorial
 		Tutorial.tutorial_part("piggy_bank_used")
+
+	#speed up if you want
+	if Input.is_action_just_pressed("speed_up"):
+		Engine.time_scale += 0.1
+		Global.current_game_speed = stepify(Engine.time_scale, 0.01)
+		Global.score += 5
 
 	# Calculate the direction the player is trying to go
 	dir = Vector2(0, 0)

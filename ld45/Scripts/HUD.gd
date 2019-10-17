@@ -40,11 +40,11 @@ func piggy_bank_notifier(con):
 		piggy_bank_notifier_anim.stop()
 
 func game_over():
+	Engine.time_scale = Global.default_game_speed
 	SFX.game_over_sound.play()
 	gameover_hud.visible = true
 	assing_highscore(Global.score)
 	gameover_anim.play("game_over_panel_collection")
-#	gameover_anim.play("restart_button")
 	get_tree().paused = true #pause game
 
 func _on_restart_btn_pressed():
@@ -59,4 +59,3 @@ func _on_gameover_anim_animation_finished(anim_name):
 		gameover_hud.visible = false
 		gameover_anim.stop()
 		emit_signal("restart_game", "restart")
-#		Global.change_scene("Game")

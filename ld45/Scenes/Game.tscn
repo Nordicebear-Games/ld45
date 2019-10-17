@@ -23,7 +23,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.2, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 100, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 150, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("DefaultTileContainer:position")
@@ -50,7 +50,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.2, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 100, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 150, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("DefaultTileContainer:position")
@@ -87,8 +87,8 @@ bomb_tile = ExtResource( 6 )
 special_tiles = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ) ]
 
 [node name="HUD" parent="." instance=ExtResource( 10 )]
-offset = Vector2( 100, 0 )
-transform = Transform2D( 1, 0, 0, 1, 100, 0 )
+offset = Vector2( 150, 0 )
+transform = Transform2D( 1, 0, 0, 1, 150, 0 )
 
 [node name="DefaultTileContainer" type="Node2D" parent="."]
 position = Vector2( -300, 0 )

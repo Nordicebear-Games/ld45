@@ -17,9 +17,9 @@ _global_script_class_icons={
 
 config/name="LD45"
 run/main_scene="res://Scenes/MainMenu.tscn"
-boot_splash/image="res://nordicebeargames transparent.png"
+boot_splash/image="res://Textures/Logo/nordicebeargames transparent.png"
 boot_splash/fullsize=false
-config/icon="res://tilox_icon.png"
+config/icon="res://Textures/Logo/tilox_icon.png"
 
 [autoload]
 
@@ -33,6 +33,12 @@ window/size/width=370
 window/size/height=320
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
+
+[importer_defaults]
+
+image={
+
+}
 
 [input]
 

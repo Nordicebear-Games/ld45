@@ -12,7 +12,7 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "paused_box_collection"
 tracks/0/type = "value"
 tracks/0/path = NodePath("PausedBox/paused_pnl:rect_position")
@@ -39,7 +39,7 @@ tracks/1/keys = {
 "values": [ Vector2( 32, -200 ), Vector2( 32, 100 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "paused_box_diffusion"
 tracks/0/type = "value"
 tracks/0/path = NodePath("PausedBox/paused_pnl:rect_position")
@@ -66,8 +66,7 @@ tracks/1/keys = {
 "values": [ Vector2( 32, 100 ), Vector2( 32, -200 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "tut_collection"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TutorialBox:position")
 tracks/0/interp = 1
@@ -81,8 +80,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 100 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "tut_diffusion"
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TutorialBox:position")
 tracks/0/interp = 1
@@ -143,9 +141,9 @@ wait_time = 0.01
 autostart = true
 
 [node name="tut_anim" type="AnimationPlayer" parent="."]
-anims/paused_box_collection = SubResource( 5 )
-anims/paused_box_diffusion = SubResource( 6 )
-anims/tut_collection = SubResource( 3 )
-anims/tut_diffusion = SubResource( 4 )
+anims/paused_box_collection = SubResource( 3 )
+anims/paused_box_diffusion = SubResource( 4 )
+anims/tut_collection = SubResource( 5 )
+anims/tut_diffusion = SubResource( 6 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

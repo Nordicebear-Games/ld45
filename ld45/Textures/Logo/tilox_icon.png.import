@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/nordicebeargames transparent.png-8b6abed3d9982c52a20a07a0de419a85.stex"
+path="res://.import/tilox_icon.png-6e5d1a41ecd8470cf9e00d52b2b1c356.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://nordicebeargames transparent.png"
-dest_files=[ "res://.import/nordicebeargames transparent.png-8b6abed3d9982c52a20a07a0de419a85.stex" ]
+source_file="res://Textures/Logo/tilox_icon.png"
+dest_files=[ "res://.import/tilox_icon.png-6e5d1a41ecd8470cf9e00d52b2b1c356.stex" ]
 
 [params]
 

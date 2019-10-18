@@ -14,7 +14,6 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 20
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
@@ -67,6 +66,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("life_sprite/life_lbl:custom_fonts/font:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 16 ]
 }
 
 [sub_resource type="DynamicFont" id=6]
@@ -300,7 +311,6 @@ align = 1
 valign = 1
 
 [node name="life_sprite" type="Sprite" parent="Game_HUD"]
-editor/display_folded = true
 position = Vector2( 317, 105 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 3 )

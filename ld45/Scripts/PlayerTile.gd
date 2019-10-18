@@ -2,7 +2,6 @@ extends "res://Scripts/Tile.gd"
 
 signal game_over
 signal piggy_bank_notifier(condition)
-#signal game_paused
 
 export (Array, Color) var colors
 
@@ -21,13 +20,9 @@ func _ready():
 func _physics_process(delta):
 	move()
 
-func _user_input():
-#	#game paused and unpaused
-#	if Input.is_action_just_pressed("game_paused"):
-#		emit_signal("game_paused")
-
+func _input(event):
 	#use piggy bank
-	if Input.is_action_just_pressed("use_stocked_points") && Global.stocked_points > 0:
+	if event.is_action_pressed("use_stocked_points") && Global.stocked_points > 0:
 		SFX.stock_point_used_sound.play()
 		move_point_value += Global.stocked_points
 		move_point_lbl.text = str(move_point_value)
@@ -37,7 +32,7 @@ func _user_input():
 		Tutorial.tutorial_part("piggy_bank_used")
 
 	#speed up if you want
-	if Input.is_action_just_pressed("speed_up"):
+	if event.is_action_pressed("speed_up"):
 		SFX.speed_up_used.play()
 		Engine.time_scale += 0.1
 		Global.current_game_speed = stepify(Engine.time_scale, 0.01)
@@ -52,18 +47,16 @@ func _user_input():
 
 	# Calculate the direction the player is trying to go
 	dir = Vector2(0, 0)
-	if (Input.is_action_just_pressed("ui_up") && grid_y > 0):
+	if (event.is_action_pressed("ui_up") && grid_y > 0):
 		dir = Vector2(0, -1)
-	elif (Input.is_action_just_pressed("ui_down") && grid_y < grid_height - 1):
+	elif (event.is_action_pressed("ui_down") && grid_y < grid_height - 1):
 		dir = Vector2(0, 1)
-	elif (Input.is_action_just_pressed("ui_right") && grid_x < grid_width - 1):
+	elif (event.is_action_pressed("ui_right") && grid_x < grid_width - 1):
 		dir = Vector2(1, 0)
-	elif (Input.is_action_just_pressed("ui_left") && grid_x > 0):
+	elif (event.is_action_pressed("ui_left") && grid_x > 0):
 		dir = Vector2(-1, 0)
 
 func move():
-	_user_input()
-
 	# Move the player to the new position
 	if (dir != Vector2(0, 0) && move_point_value != 0):
 		var target = Vector2(grid_x + dir[0], grid_y + dir[1])

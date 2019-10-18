@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var tutorial_box = $TutorialBox
 onready var dialog_box = $TutorialBox/DialogBox
-onready var paused_box = $PausedBox
+#onready var paused_box = $PausedBox
 #warning-ignore:unused_class_variable
 onready var tut_anim = $tut_anim
 
@@ -42,10 +42,12 @@ func game(con):
 	if Global.load_tut():
 		if con == "continue":
 			get_tree().paused = false
-			paused_box.visible = false
+#			paused_box.visible = false
+			tut_anim.play("paused_box_diffusion")
 		if con == "stop":
 			get_tree().paused = true
-			paused_box.visible = true
+#			paused_box.visible = true
+			tut_anim.play("paused_box_collection")
 
 func show_dialog_page(dialog_name, page_no):
 	dialog_box.set_bbcode(dialog_name[page_no])
@@ -69,25 +71,25 @@ func tutorial_part(part):
 		tutorial("show")
 
 	if part == "tutorial_1":  
-		yield(get_tree().create_timer(4), "timeout")
+		yield(get_tree().create_timer(5), "timeout")
 		game("stop")
 		show_dialog_page(tut_dialog, 1)
-		yield(get_tree().create_timer(6), "timeout")
+		yield(get_tree().create_timer(7), "timeout")
 		show_dialog_page(tut_dialog, 2)
 		game("continue")
 
 	if part == "tutorial_2":
 		game("stop")
 		show_dialog_page(tut_dialog, 3)
-		yield(get_tree().create_timer(3), "timeout")
+		yield(get_tree().create_timer(4), "timeout")
 		show_dialog_page(tut_dialog, 4)
-		yield(get_tree().create_timer(5), "timeout")
+		yield(get_tree().create_timer(6), "timeout")
 		show_dialog_page(tut_dialog, 5)
-		yield(get_tree().create_timer(4), "timeout")
+		yield(get_tree().create_timer(5), "timeout")
 		show_dialog_page(tut_dialog, 6)
-		yield(get_tree().create_timer(4), "timeout")
+		yield(get_tree().create_timer(5), "timeout")
 		show_dialog_page(tut_dialog, 7)
-		yield(get_tree().create_timer(4), "timeout")
+		yield(get_tree().create_timer(5), "timeout")
 		game("continue")
 		Global.save_tut(false)
 

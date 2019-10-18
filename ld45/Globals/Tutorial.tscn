@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Globals/Tutorial.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=2]
@@ -11,6 +11,60 @@ size = 50
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "paused_box_collection"
+tracks/0/type = "value"
+tracks/0/path = NodePath("PausedBox/paused_pnl:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -250, 96 ), Vector2( 32, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PausedBox/paused_lbl:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -200 ), Vector2( 32, 100 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "paused_box_diffusion"
+tracks/0/type = "value"
+tracks/0/path = NodePath("PausedBox/paused_pnl:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 96 ), Vector2( -250, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PausedBox/paused_lbl:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 100 ), Vector2( 32, -200 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "tut_collection"
@@ -65,22 +119,22 @@ custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 
 [node name="PausedBox" type="Node2D" parent="."]
-visible = false
 
 [node name="paused_pnl" type="Panel" parent="PausedBox"]
 modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 32.0
+margin_left = -250.0
 margin_top = 96.0
-margin_right = 224.0
+margin_right = -58.0
 margin_bottom = 224.0
 
 [node name="paused_lbl" type="Label" parent="PausedBox"]
-margin_left = 64.0
-margin_top = 128.0
-margin_right = 192.0
-margin_bottom = 192.0
+margin_left = 32.0
+margin_top = -200.0
+margin_right = 224.0
+margin_bottom = -76.0
 custom_fonts/font = SubResource( 2 )
-text = "Paused"
+text = "Tutorial
+Time"
 align = 1
 valign = 1
 
@@ -89,6 +143,8 @@ wait_time = 0.01
 autostart = true
 
 [node name="tut_anim" type="AnimationPlayer" parent="."]
+anims/paused_box_collection = SubResource( 5 )
+anims/paused_box_diffusion = SubResource( 6 )
 anims/tut_collection = SubResource( 3 )
 anims/tut_diffusion = SubResource( 4 )
 

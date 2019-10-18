@@ -16,7 +16,7 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "menu collection"
 tracks/0/type = "value"
 tracks/0/path = NodePath("tilox:position")
@@ -142,8 +142,7 @@ tracks/4/keys = {
 "values": [ Vector2( 256, 0 ), Vector2( 400, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "start_button"
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Start_btn:rect_scale")
@@ -221,9 +220,9 @@ align = 1
 valign = 1
 
 [node name="main_menu_anim" type="AnimationPlayer" parent="."]
-"anims/menu collection" = SubResource( 5 )
+"anims/menu collection" = SubResource( 3 )
 anims/menu_diffusion = SubResource( 4 )
-anims/start_button = SubResource( 3 )
+anims/start_button = SubResource( 5 )
 
 [node name="color_change_timer" type="Timer" parent="."]
 wait_time = 15.0

@@ -12,7 +12,6 @@ onready var gameover_hud = $GameOver_HUD
 onready var highscore_lbl = $GameOver_HUD/highscore_lbl
 onready var game_panel_anim = $Game_HUD/game_panel_anim
 onready var gameover_anim = $GameOver_HUD/gameover_anim
-#onready var hud_anim = $hud_anim
 
 var highscore = 0
 

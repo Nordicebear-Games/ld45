@@ -2,6 +2,7 @@ extends "res://Scripts/Tile.gd"
 
 signal game_over
 signal piggy_bank_notifier(condition)
+#signal game_paused
 
 export (Array, Color) var colors
 
@@ -21,6 +22,10 @@ func _physics_process(delta):
 	move()
 
 func _user_input():
+#	#game paused and unpaused
+#	if Input.is_action_just_pressed("game_paused"):
+#		emit_signal("game_paused")
+
 	#use piggy bank
 	if Input.is_action_just_pressed("use_stocked_points") && Global.stocked_points > 0:
 		SFX.stock_point_used_sound.play()

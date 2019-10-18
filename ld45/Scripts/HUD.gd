@@ -12,6 +12,7 @@ onready var gameover_hud = $GameOver_HUD
 onready var highscore_lbl = $GameOver_HUD/highscore_lbl
 onready var game_panel_anim = $Game_HUD/game_panel_anim
 onready var gameover_anim = $GameOver_HUD/gameover_anim
+onready var paused_anim = $Paused_HUD/paused_anim
 
 var highscore = 0
 
@@ -24,6 +25,16 @@ func _process(delta):
 	speed_lbl.text = "Speed: " + str(Global.current_game_speed)
 	life_lbl.text = str(Global.life)
 	stock_point_lbl.text = str(Global.stocked_points)
+
+func _input(event):
+	if gameover_hud.visible == false && !Global.load_tut():
+		#game paused and unpaused
+		if event.is_action_pressed("game_paused") && !get_tree().paused: #pause game
+			get_tree().paused = true
+			paused_anim.play("paused_panel_collection")
+		elif event.is_action_pressed("game_paused") && get_tree().paused: #unpause game
+			get_tree().paused = false
+			paused_anim.play("paused_panel_diffusion")
 
 func assing_highscore(value):
 		Global.save_highscore(value)

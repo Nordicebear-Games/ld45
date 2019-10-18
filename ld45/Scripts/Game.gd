@@ -91,6 +91,7 @@ func _signal_connect(which_obj):
 	if which_obj == "player_tile":
 		ins_player_tile.connect("game_over", hud, "game_over")
 		ins_player_tile.connect("piggy_bank_notifier", hud, "piggy_bank_notifier")
+#		ins_player_tile.connect("game_paused", hud, "game_paused")
 	if which_obj == "point_tile":
 		ins_tile.connect("make_it_bomb_tile", self, "from_point_to_bomb")
 	if which_obj == "aim_tile":

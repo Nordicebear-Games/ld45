@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=2]
@@ -214,10 +214,72 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.75 ) ]
 }
 
+[sub_resource type="DynamicFont" id=12]
+size = 50
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "paused_panel_collection"
+tracks/0/type = "value"
+tracks/0/path = NodePath("paused_panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -400, 96 ), Vector2( 32, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paused_lbl:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -200 ), Vector2( 32, 96 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "paused_panel_diffusion"
+tracks/0/type = "value"
+tracks/0/path = NodePath("paused_panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 96 ), Vector2( -400, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paused_lbl:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 96 ), Vector2( 32, -200 ) ]
+}
+
 [node name="HUD" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Game_HUD" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="score_lbl" type="Label" parent="Game_HUD"]
 margin_left = 256.0
@@ -257,6 +319,7 @@ align = 1
 valign = 1
 
 [node name="stock_point_sprite" type="Sprite" parent="Game_HUD"]
+editor/display_folded = true
 position = Vector2( 317, 180 )
 scale = Vector2( 2.1875, 2.125 )
 texture = ExtResource( 4 )
@@ -290,6 +353,7 @@ anims/life_and_piggy = SubResource( 5 )
 
 [node name="GameOver_HUD" type="Node2D" parent="."]
 pause_mode = 2
+editor/display_folded = true
 visible = false
 
 [node name="gameover_panel" type="Panel" parent="GameOver_HUD"]
@@ -333,6 +397,32 @@ pause_mode = 2
 anims/game_over_panel_collection = SubResource( 9 )
 anims/game_over_panel_diffusion = SubResource( 10 )
 anims/restart_button = SubResource( 11 )
+
+[node name="Paused_HUD" type="Control" parent="."]
+pause_mode = 2
+editor/display_folded = true
+
+[node name="paused_panel" type="Panel" parent="Paused_HUD"]
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = -400.0
+margin_top = 96.0
+margin_right = -208.0
+margin_bottom = 224.0
+
+[node name="paused_lbl" type="Label" parent="Paused_HUD"]
+margin_left = 32.0
+margin_top = -200.0
+margin_right = 224.0
+margin_bottom = -72.0
+custom_fonts/font = SubResource( 12 )
+text = "Paused"
+align = 1
+valign = 1
+
+[node name="paused_anim" type="AnimationPlayer" parent="Paused_HUD"]
+pause_mode = 2
+anims/paused_panel_collection = SubResource( 13 )
+anims/paused_panel_diffusion = SubResource( 14 )
 
 [connection signal="pressed" from="GameOver_HUD/restart_btn" to="." method="_on_restart_btn_pressed"]
 [connection signal="animation_finished" from="GameOver_HUD/gameover_anim" to="." method="_on_gameover_anim_animation_finished"]

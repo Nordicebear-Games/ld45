@@ -6,6 +6,6 @@ til0x is simple tile-based game. You start with nothing, at first you don’t ev
 
 # LINKS
 
-- [itch.io](https://nordicebear.itch.io/til0x)
+- [itch.io](https://avodhel.itch.io/til0x)
 - [ludum page](https://ldjam.com/events/ludum-dare/45/til0x)
 
